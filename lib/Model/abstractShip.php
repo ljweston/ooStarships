@@ -1,13 +1,19 @@
 <?php
-
-class AbstractShip
+// prevents instantiation of an AbstractShip object
+abstract class AbstractShip
 {
     private $id;
     private $name;
     private $weaponPower = 0;
     private $strength = 0;
+
+    abstract public function getJediFactor(); // forces extended class to have this method
     
-    // constructor called everytime we call "SHIP" or a new instantiation
+    abstract public function getType();
+
+    abstract public function isFunctional();
+
+    // constructor that is shared with extended classes
     public function __construct($name)
     {
         $this->name = $name;

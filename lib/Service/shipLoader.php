@@ -13,7 +13,7 @@ class ShipLoader
     }
 
     /**
-     * @return Ship[]
+     * @return AbstractShip[]
      */
     public function getShips()
     {
@@ -28,7 +28,7 @@ class ShipLoader
         return $ships;
     }
     /**
-     * @return Ship/null
+     * @return AbstractShip/null
      */
     public function findOneById($id)
     {
