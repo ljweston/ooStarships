@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/lib/Model/abstractShip.php';
 require_once __DIR__.'/lib/Model/ship.php';
+require_once __DIR__.'/lib/Model/brokenShip.php';
 require_once __DIR__.'/lib/Model/rebelship.php';
 require_once __DIR__.'/lib/Model/battleResult.php';
 require_once __DIR__.'/lib/Service/battleManager.php';
