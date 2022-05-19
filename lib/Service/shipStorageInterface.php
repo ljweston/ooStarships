@@ -1,5 +1,5 @@
 <?php
-
+// Can be passed around and won't worry about the object that is returned
 interface ShipStorageInterface
 {
     /**
