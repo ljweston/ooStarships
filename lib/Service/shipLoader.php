@@ -4,12 +4,12 @@
 class ShipLoader
 {
     // service class property: used to store options and objs for the class
-    private $pdo;
+    private $shipStorage;
 
     // configure db data
-    public function __construct(PDO $pdo)
+    public function __construct(PdoShipStorage $shipStorage)
     {
-        $this->pdo = $pdo;
+        $this->shipStorage = $shipStorage;
     }
 
     /**
@@ -18,7 +18,7 @@ class ShipLoader
     public function getShips()
     {
         // returns our data from the DB
-        $shipsData = $this->queryForShips();
+        $shipsData = $this->shipStorage->fetchAllShipsData();
         // storing our ships in the ships array
         $ships = [];
         foreach ($shipsData as $shipData) {
@@ -28,20 +28,12 @@ class ShipLoader
         return $ships;
     }
     /**
+     * @param $id
      * @return AbstractShip/null
      */
     public function findOneById($id)
     {
-        $pdo = $this->getPDO();
-        $statement = $pdo->prepare('SELECT * FROM ship WHERE id = :id');
-        // preapared statement
-        $statement->execute(array('id' => $id));
-        // $statement->bindParam()
-        $shipArray = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if ($shipArray == false) {
-            return null;
-        }
+        $shipArray = $this->shipStorage->fetchSingleShipData($id);
 
         return $this->createShipFromData($shipArray);
     }
@@ -60,27 +52,4 @@ class ShipLoader
 
         return $ship;
     }
-
-    private function queryForShips()
-    {
-        $pdo = $this->getPDO();
-        $statement = $pdo->prepare('SELECT * FROM ship');
-        $statement->execute();
-        $shipsArray = $statement->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $shipsArray;
-    }
-
-    // reduce number of pdo objects created
-    private function getPDO()
-    {
-        return $this->pdo;
-    }
-
-    // if ($this->pdo === null) {
-    //     $pdo = new PDO($this->dbDSN, $this->dbUser, $this->dbPass);
-    //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //     $this->pdo = $pdo;
-    // }
 }
