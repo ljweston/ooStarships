@@ -6,7 +6,9 @@ require_once __DIR__.'/lib/Model/rebelship.php';
 require_once __DIR__.'/lib/Model/battleResult.php';
 require_once __DIR__.'/lib/Service/battleManager.php';
 require_once __DIR__.'/lib/Service/shipLoader.php';
+require_once __DIR__.'/lib/Service/shipStorageInterface.php';
 require_once __DIR__.'/lib/Service/pdoShipStorage.php';
+require_once __DIR__.'/lib/Service/JsonFileShipStorage.php';
 require_once __DIR__.'/lib/Service/container.php';
 
 // DB CONFIGURATION INFO
