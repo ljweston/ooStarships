@@ -73,6 +73,7 @@ if (isset($_GET['error'])) {
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
                             <td><?php echo $ship->getStrength(); ?></td>
+                            <td><?php echo $ship->getType(); ?></td>
                             <td>
                                 <?php if ($ship->isFunctional()) : ?>
                                     <i class="Fa fa-sun-o"></i>
@@ -80,7 +81,6 @@ if (isset($_GET['error'])) {
                                     <i class="fa fa-cloud"></i>
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo $ship->getType(); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

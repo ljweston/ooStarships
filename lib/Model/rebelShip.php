@@ -1,6 +1,6 @@
 <?php
 
-class RebelShip extends Ship
+class RebelShip extends AbstractShip
 {
     public function getFavoriteJedi()
     {
@@ -17,5 +17,16 @@ class RebelShip extends Ship
     public function isFunctional()
     {
         return true;
+    }
+
+    public function getNameAndSpecs($useShortFormat = false)
+    {
+        $val = parent::getNameAndSpecs($useShortFormat);
+        $val .= ' (Rebel)';
+    }
+
+    public function getJediFactor()
+    {
+        return rand(10, 30);
     }
 }
