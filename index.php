@@ -2,6 +2,7 @@
 require __DIR__.'/bootstrap.php';
 // $configuration comes from bootstrap.php
 $container = new Container($configuration);
+
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 

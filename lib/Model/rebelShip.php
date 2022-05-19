@@ -6,7 +6,7 @@ class RebelShip extends AbstractShip
     {
         $coolJedis = array('Yoda', 'Ben Kenobi');
         $key = array_rand($coolJedis);
-        return $key;
+        return $coolJedis[$key];
     }
 
     public function getType()
@@ -23,6 +23,8 @@ class RebelShip extends AbstractShip
     {
         $val = parent::getNameAndSpecs($useShortFormat);
         $val .= ' (Rebel)';
+
+        return $val;    
     }
 
     public function getJediFactor()

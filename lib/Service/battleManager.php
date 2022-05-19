@@ -6,7 +6,7 @@
  */
 class BattleManager
 {
-        public function battle(Ship $ship1, int $ship1Quantity, Ship $ship2, int $ship2Quantity)
+        public function battle(AbstractShip $ship1, int $ship1Quantity, AbstractShip $ship2, int $ship2Quantity)
         {
             // TODO: health management
             $ship1Health = $ship1->getStrength() * $ship1Quantity;
@@ -56,7 +56,7 @@ class BattleManager
         }
         // only code effected is in this file.
         // TODO: May need better solution for how good the force is
-        private function didJediDestroyShipUsingTheForce(Ship $ship)
+        private function didJediDestroyShipUsingTheForce(AbstractShip $ship)
         {
             $jediHeroProbability = $ship->getJediFactor() / 100;
 

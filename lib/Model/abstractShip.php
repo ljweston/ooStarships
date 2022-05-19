@@ -1,6 +1,6 @@
 <?php
 
-abstract class AbstractShip
+class AbstractShip
 {
     private $id;
     private $name;
