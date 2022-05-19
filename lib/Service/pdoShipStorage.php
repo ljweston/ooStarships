@@ -1,6 +1,6 @@
 <?php
 // service class to handle PDO queries for ships
-class PdoShipStorage
+class PdoShipStorage implements ShipStorageInterface
 {
     private $pdo;
 

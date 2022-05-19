@@ -6,8 +6,8 @@ class ShipLoader
     // service class property: used to store options and objs for the class
     private $shipStorage;
 
-    // configure db data
-    public function __construct(PdoShipStorage $shipStorage)
+    // configure DB Data or JSON File Data
+    public function __construct(ShipStorageInterface $shipStorage)
     {
         $this->shipStorage = $shipStorage;
     }
