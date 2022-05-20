@@ -6,7 +6,12 @@
  */
 class BattleManager
 {
-        public function battle(AbstractShip $ship1, int $ship1Quantity, AbstractShip $ship2, int $ship2Quantity)
+    // CLASS CONSTANTS
+    const TYPE_NORMAL = 'type_normal';
+    const TYPE_NO_JEDI = 'no_jedi';
+    const TYPE_ONLY_JEDI = 'only_jedi';
+
+        public function battle(AbstractShip $ship1, int $ship1Quantity, AbstractShip $ship2, int $ship2Quantity, $battleType)
         {
             // TODO: health management
             $ship1Health = $ship1->getStrength() * $ship1Quantity;
@@ -14,24 +19,33 @@ class BattleManager
 
             $ship1UsedJediPowers = false;
             $ship2UsedJediPowers = false;
+            $i = 0;
             while ($ship1Health > 0 && $ship2Health > 0) {
                 // first, see if we have a rare Jedi hero event!
-                if ($this->didJediDestroyShipUsingTheForce($ship1)) {
+                if ($battleType != BattleManager::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship1)) {
                     $ship2Health = 0;
                     $ship1UsedJediPowers = true;
 
                     break;
                 }
-                if ($this->didJediDestroyShipUsingTheForce($ship2)) {
+                if ($battleType != BattleManager::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship2)) {
                     $ship1Health = 0;
                     $ship2UsedJediPowers = true;
 
                     break;
                 }
 
-                // now battle them normally
-                $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
-                $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);
+                if ($battleType != BattleManager::TYPE_ONLY_JEDI) {
+                    // now battle them normally
+                    $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
+                    $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);
+                }
+
+                if ($i == 100) {
+                    $ship1Health = 0;
+                    $ship2Health = 0;
+                }
+                $i++;
             }
             // We are now effecting/ changing data PASS BY REFERENCE
             $ship1->setStrength($ship1Health);

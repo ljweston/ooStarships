@@ -118,7 +118,16 @@ if (isset($_GET['error'])) {
                         </select>
                         <br>
 
-                        
+                        <div class="text-center">
+                            <label for="battle_type">Battle Type</label>
+                            <select name="battle_type" id="battle_type" class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle">
+                                <option value="<?php echo BattleManager::TYPE_NORMAL?>">Normal</option>
+                                <option value="<?php echo BattleManager::TYPE_NO_JEDI?>">No Jedi Powers</option>
+                                <option value="<?php echo BattleManager::TYPE_ONLY_JEDI?>">Only Jedi Powers</option>
+                            </select>
+                        </div>
+                        <br>
+
                         <button class="btn btn-md btn-danger center-block" type="submit">Engage</button>
                     </form>
                 </div>
