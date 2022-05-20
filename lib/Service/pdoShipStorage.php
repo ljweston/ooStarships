@@ -24,7 +24,7 @@ class PdoShipStorage implements ShipStorageInterface
     }
 
     /**
-     * @return Ship[]/null
+     * @return Ship[]|null
      */
     public function fetchSingleShipData($id)
     {

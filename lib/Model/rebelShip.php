@@ -24,7 +24,7 @@ class RebelShip extends AbstractShip
         $val = parent::getNameAndSpecs($useShortFormat);
         $val .= ' (Rebel)';
 
-        return $val;    
+        return $val;
     }
 
     public function getJediFactor()

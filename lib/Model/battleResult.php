@@ -31,7 +31,7 @@ class BattleResult
     }
 
     /**
-     * @return AbstractShip/null
+     * @return AbstractShip|null
      */
     public function getLosingShip()
     {

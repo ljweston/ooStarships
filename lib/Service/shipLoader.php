@@ -29,7 +29,7 @@ class ShipLoader
     }
     /**
      * @param $id
-     * @return AbstractShip/null
+     * @return AbstractShip|null
      */
     public function findOneById($id)
     {

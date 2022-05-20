@@ -3,7 +3,7 @@ require __DIR__.'/bootstrap.php';
 
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
-$ships = $shipLoader->getShips();
+$ships = $shipLoader->getShips(); // values may be getting changed here
 
 // Fixed error where ship quantity would not default to 1: then changed it to be cleaner.
 $ship1Id = isset($_POST['ship1_id']) ? $_POST['ship1_id'] : null;
