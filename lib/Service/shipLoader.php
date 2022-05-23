@@ -22,8 +22,13 @@ class ShipLoader
      */
     public function getShips()
     {
-        // returns our data from the DB
-        $shipsData = $this->shipStorage->fetchAllShipsData();
+        try {
+            // returns our data from the DB
+            $shipsData = $this->shipStorage->fetchAllShipsData();
+        } catch (\PDOException $e) {
+            trigger_error('Database Exception! '.$e->getMessage());
+            $shipsData = [];
+        }
         // storing our ships in the ships array
         $ships = [];
         foreach ($shipsData as $shipData) {
