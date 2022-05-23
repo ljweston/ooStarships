@@ -2,9 +2,11 @@
 
 namespace Service;
 
+use Model\BountyHunterShip;
 use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
+use Model\ShipCollection;
 
 class ShipLoader
 {
@@ -18,24 +20,21 @@ class ShipLoader
     }
 
     /**
-     * @return AbstractShip[]
+     * @return ShipCollection
      */
     public function getShips()
     {
-        try {
-            // returns our data from the DB
-            $shipsData = $this->shipStorage->fetchAllShipsData();
-        } catch (\PDOException $e) {
-            trigger_error('Database Exception! '.$e->getMessage());
-            $shipsData = [];
-        }
-        // storing our ships in the ships array
-        $ships = [];
+        $ships = array();
+
+        $shipsData = $this->queryForShips();
+
         foreach ($shipsData as $shipData) {
             $ships[] = $this->createShipFromData($shipData);
         }
-        
-        return $ships;
+        // Boba Fett's ship
+        $ships[] = new BountyHunterShip('Slave I');
+
+        return new ShipCollection($ships);
     }
     /**
      * @param $id
@@ -62,5 +61,16 @@ class ShipLoader
         $ship->setStrength($shipData['strength']);
 
         return $ship;
+    }
+
+    private function queryForShips()
+    {
+        try {
+            return $this->shipStorage->fetchAllShipsData();
+        } catch (\PDOException $e) {
+            trigger_error('Database Exception! '.$e->getMessage());
+            // if all else fails, just return an empty array
+            return [];
+        }
     }
 }
