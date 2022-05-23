@@ -1,15 +1,14 @@
 <?php
-require_once __DIR__.'/lib/Model/abstractShip.php';
-require_once __DIR__.'/lib/Model/ship.php';
-require_once __DIR__.'/lib/Model/brokenShip.php';
-require_once __DIR__.'/lib/Model/rebelship.php';
-require_once __DIR__.'/lib/Model/battleResult.php';
-require_once __DIR__.'/lib/Service/battleManager.php';
-require_once __DIR__.'/lib/Service/shipLoader.php';
-require_once __DIR__.'/lib/Service/shipStorageInterface.php';
-require_once __DIR__.'/lib/Service/pdoShipStorage.php';
-require_once __DIR__.'/lib/Service/JsonFileShipStorage.php';
-require_once __DIR__.'/lib/Service/container.php';
+
+// Autoloaders
+spl_autoload_register(function($className) {
+    // using two backslashes reoresents one backslash because it is an escape character
+    $path = __DIR__.'/lib/'.str_replace('\\', '/', $className).'.php';
+
+    if (file_exists($path)) {
+        require $path;
+    }
+});
 
 // DB CONFIGURATION INFO
 $configuration = [
