@@ -105,4 +105,9 @@ abstract class AbstractShip
     {
         return 'Password';
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
