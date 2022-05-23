@@ -1,16 +1,21 @@
 <?php
-/**
- * Fighting algorithm
- * 
- * @return BattleResult
- */
+
+namespace Service;
+
+use Model\BattleResult;
+use Model\AbstractShip;
+
 class BattleManager
 {
     // CLASS CONSTANTS
     const TYPE_NORMAL = 'type_normal';
     const TYPE_NO_JEDI = 'no_jedi';
     const TYPE_ONLY_JEDI = 'only_jedi';
-
+        /**
+         * Fighting algorithm
+         * 
+         * @return BattleResult
+         */
         public function battle(AbstractShip $ship1, int $ship1Quantity, AbstractShip $ship2, int $ship2Quantity, $battleType)
         {
             // TODO: health management
@@ -22,20 +27,20 @@ class BattleManager
             $i = 0;
             while ($ship1Health > 0 && $ship2Health > 0) {
                 // first, see if we have a rare Jedi hero event!
-                if ($battleType != BattleManager::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship1)) {
+                if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship1)) {
                     $ship2Health = 0;
                     $ship1UsedJediPowers = true;
 
                     break;
                 }
-                if ($battleType != BattleManager::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship2)) {
+                if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship2)) {
                     $ship1Health = 0;
                     $ship2UsedJediPowers = true;
 
                     break;
                 }
 
-                if ($battleType != BattleManager::TYPE_ONLY_JEDI) {
+                if ($battleType != self::TYPE_ONLY_JEDI) {
                     // now battle them normally
                     $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
                     $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);

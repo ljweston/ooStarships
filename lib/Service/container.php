@@ -6,6 +6,10 @@
  * Known as a dependency container
  */
 
+namespace Service;
+
+use \PDO; // built in PDO object referenced in root
+
 class Container
 {
     private $configuration;

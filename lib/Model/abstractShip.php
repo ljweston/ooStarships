@@ -1,4 +1,6 @@
 <?php
+
+namespace Model;
 // prevents instantiation of an AbstractShip object
 abstract class AbstractShip
 {

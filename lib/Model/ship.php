@@ -1,4 +1,6 @@
 <?php
+
+namespace Model;
 // Model Class
 class Ship extends AbstractShip
 {

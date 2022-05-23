@@ -1,4 +1,7 @@
 <?php
+
+namespace Service;
+
 // Loads data from JSON file and not DB
 class JsonFileShipStorage implements ShipStorageInterface
 {

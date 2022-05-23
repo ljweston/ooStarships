@@ -1,5 +1,10 @@
 <?php
 
+namespace Service;
+
+use Model\RebelShip;
+use Model\Ship;
+use Model\AbstractShip;
 
 class ShipLoader
 {
@@ -38,6 +43,7 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
+    // RebelShip threw an error where it's RebelShip was assumed to be in the Service namespace
     private function createShipFromData(array $shipData)
     {
         if ($shipData['team'] == 'rebel') {
