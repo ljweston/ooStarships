@@ -11,9 +11,6 @@ $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
-$brokenShip = new BrokenShip('Millenium Falcon');
-$ships[] = $brokenShip;
-
 // Error checking for bad data passed to start a battle
 $errorMessage = '';
 if (isset($_GET['error'])) {
