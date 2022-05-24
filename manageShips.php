@@ -48,6 +48,7 @@ $ships = $shipLoader->getShips();
                         <th>Jedi Factor</th>
                         <th>Strength</th>
                         <th>Type</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
