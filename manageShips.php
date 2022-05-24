@@ -40,6 +40,7 @@ $ships = $shipLoader->getShips();
             </div>
             <table class="table table-hover">
                 <caption><i class="fa fa-rocket"></i> View/ Edit These Ships</caption>
+                <a href="index.php" class="btn btn-md btn-primary pull-right">Return Home</a>
                 <thead>
                     <tr>
                         <th>Ship</th>
