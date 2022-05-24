@@ -3,7 +3,6 @@ require __DIR__.'/bootstrap.php';
 
 use Service\BattleManager;
 use Service\Container;
-use Model\BrokenShip;
 
 // $configuration comes from bootstrap.php
 $container = new Container($configuration);
