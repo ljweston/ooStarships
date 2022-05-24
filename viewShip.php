@@ -23,7 +23,7 @@ require 'layout/header.php';
             </div>
             <a href="/manageShips.php" class="btn btn-md btn-primary pull-right">Manage Ships</a>
             
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped">
                 <tbody>
                     <tr class="d-flex">
                         <th class="col-1">Name:</th>
