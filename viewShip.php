@@ -4,7 +4,7 @@ require __DIR__.'/bootstrap.php';
 // ADD, EDIT, DELETE
 use Service\Container;
 
-require 'layout/header.php';
+
 
 $id = $_GET['id'];
 
@@ -13,4 +13,40 @@ $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ship = $shipLoader->findOneById($id); // values may be getting changed here
 
-echo $ship->getName();
+require 'layout/header.php';
+
+?>
+
+    <div class="container">
+            <div class="page-header">
+                <h1>Viewing the <?php echo $ship->getName()?></h1>
+            </div>
+            <a href="/manageShips.php" class="btn btn-md btn-primary pull-right">Manage Ships</a>
+            
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr class="d-flex">
+                        <th class="col-1">Name:</th>
+                        <td><?php echo $ship->getName()?></td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-1">Weapon Power:</th>
+                        <td><?php echo $ship->getWeaponPower()?></td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-1">Strength:</th>
+                        <td><?php echo $ship->getStrength()?></td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th class="col-1">Jedi Power:</th>
+                        <td><?php echo $ship->getJediFactor()?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <a href="" class="btn btn-md btn-success">Edit</a>
+                <a href=""class="btn btn-md btn-danger">Delete</a>
+            </div>
+    </div>
+
+<?php require 'layout/header.php'?>
