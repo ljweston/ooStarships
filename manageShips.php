@@ -35,7 +35,8 @@ require 'layout/header.php';
                 <tbody>
                     <?php foreach ($ships as $ship): ?>
                         <tr>
-                            <td><a href=""><?php echo $ship->getName(); ?></a></td>
+                            <td><a href="viewShip.php?id=<?php echo $ship->getId();?>">
+                            <?php echo $ship->getName(); ?></a></td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
                             <td><?php echo $ship->getStrength(); ?></td>
@@ -52,5 +53,5 @@ require 'layout/header.php';
                 </tbody>
             </table>
         </div>
-        
+
 <?php require 'layout/footer.php';?>
