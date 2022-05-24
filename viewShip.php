@@ -34,6 +34,14 @@ require 'layout/header.php';
 ?>
 
     <div class="container">
+        <!-- breadcrumb here
+            Home >> ManageShips >> JediStarfighter
+        -->
+        <ul class="breadcrumb">
+            <li><a href="/index.php">Home</a></li>
+            <li><a href="/manageShips.php">ManageShips</a></li>
+            <li><a><?php echo $ship->getName()?></a></li>
+        </ul>
             <div class="page-header">
                 <h1>Viewing the <?php echo $ship->getName()?></h1>
             </div>

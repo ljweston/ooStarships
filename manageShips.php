@@ -16,6 +16,10 @@ require 'layout/header.php';
     <!-- Error handling -->
 
         <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/index.php">Home</a></li>
+                <li><a>ManageShips</a></li>
+            </ul>
             <div class="page-header">
                 <h1>Manage Our Ships</h1>
             </div>
