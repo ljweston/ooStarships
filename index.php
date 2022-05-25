@@ -23,9 +23,6 @@ if (isset($_GET['error'])) {
         case 'bad_quantities':
             $errorMessage = 'You picked a strange numbers of ships to battle - try again.';
             break;
-        case 'bad_id':
-            $errorMessage = 'Bad ship ID.';
-            break;
         default:
             $errorMessage = 'There was a disturbance in the force. Try again.';
     }

@@ -41,9 +41,10 @@ class ShipLoader
     public function findOneById($id)
     {
         $shipArray = $this->shipStorage->fetchSingleShipData($id);
-        if ($shipArray == null) {
+        if ($shipArray === null) {
             return null;
         }
+        
         return $this->createShipFromData($shipArray);
     }
 
