@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/bootstrap.php';
+require __DIR__.'/../bootstrap.php';
 // page to display a single ship data with the options to:
 // ADD, EDIT, DELETE
 use Service\Container;
@@ -13,7 +13,7 @@ $shipLoader = $container->getShipLoader();
 // check if the ID is valid. 
 $ship = $shipLoader->findOneById($id);
 
-require 'layout/header.php';
+require '../layout/header.php';
 
 ?>
 
@@ -66,4 +66,4 @@ require 'layout/header.php';
             </div>
         <?php endif; ?>
     </div>
-<?php require 'layout/footer.php'?>
+<?php require '../layout/footer.php'?>
