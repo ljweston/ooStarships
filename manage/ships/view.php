@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/../bootstrap.php';
+require __DIR__.'/../../bootstrap.php';
 // page to display a single ship data with the options to:
 // ADD, EDIT, DELETE
 use Service\Container;
@@ -13,14 +13,14 @@ $shipLoader = $container->getShipLoader();
 // check if the ID is valid. 
 $ship = $shipLoader->findOneById($id);
 
-require 'header.php';
+require '../layout/header.php';
 
 ?>
 
     <div class="container">
         <ul class="breadcrumb">
-            <li><a href="/index.php">Home</a></li>
-            <li><a href="/manageShips.php">ManageShips</a></li>
+            <li><a href="../../index.php">Home</a></li>
+            <li><a href="manageShips.php">ManageShips</a></li>
             <li><?php echo $ship === null ? "Ship not found" : $ship->getName() ?></li>
         </ul>
         <?php if ($ship === null): ?>
@@ -66,4 +66,4 @@ require 'header.php';
             </div>
         <?php endif; ?>
     </div>
-<?php require 'footer.php'?>
+<?php require '../layout/footer.php'?>
