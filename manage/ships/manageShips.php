@@ -17,7 +17,7 @@ require '../layout/header.php';
 
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="../index.php">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>ManageShips</li>
             </ul>
             <div class="page-header">
