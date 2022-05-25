@@ -13,7 +13,7 @@ $shipLoader = $container->getShipLoader();
 // check if the ID is valid. 
 $ship = $shipLoader->findOneById($id);
 
-require '../layout/header.php';
+require 'header.php';
 
 ?>
 
@@ -66,4 +66,4 @@ require '../layout/header.php';
             </div>
         <?php endif; ?>
     </div>
-<?php require '../layout/footer.php'?>
+<?php require 'footer.php'?>
