@@ -16,6 +16,10 @@ require 'layout/header.php';
     <!-- Error handling -->
 
         <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/index.php">Home</a></li>
+                <li>ManageShips</li>
+            </ul>
             <div class="page-header">
                 <h1>Manage Our Ships</h1>
             </div>
@@ -35,7 +39,11 @@ require 'layout/header.php';
                 <tbody>
                     <?php foreach ($ships as $ship): ?>
                         <tr>
-                            <td><a href=""><?php echo $ship->getName(); ?></a></td>
+                            <td>
+                                <a href="/viewShip.php?id=<?php echo $ship->getId();?>">
+                                    <?php echo $ship->getName(); ?>
+                                </a>
+                            </td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
                             <td><?php echo $ship->getStrength(); ?></td>
@@ -52,5 +60,5 @@ require 'layout/header.php';
                 </tbody>
             </table>
         </div>
-        
+
 <?php require 'layout/footer.php';?>

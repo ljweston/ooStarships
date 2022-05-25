@@ -31,8 +31,6 @@ class ShipLoader
         foreach ($shipsData as $shipData) {
             $ships[] = $this->createShipFromData($shipData);
         }
-        // Boba Fett's ship
-        $ships[] = new BountyHunterShip('Slave I');
 
         return new ShipCollection($ships);
     }
@@ -43,7 +41,10 @@ class ShipLoader
     public function findOneById($id)
     {
         $shipArray = $this->shipStorage->fetchSingleShipData($id);
-
+        if ($shipArray === null) {
+            return null;
+        }
+        
         return $this->createShipFromData($shipArray);
     }
 
