@@ -20,7 +20,7 @@ require '../layout/header.php';
     <div class="container">
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
-            <li><a href="manageShips.php">ManageShips</a></li>
+            <li><a href="/manage/ships/index.php">ManageShips</a></li>
             <li><?php echo $ship === null ? "Ship not found" : $ship->getName() ?></li>
         </ul>
         <?php if ($ship === null): ?>
