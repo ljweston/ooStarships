@@ -59,6 +59,9 @@ require 'layout/header.php';
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div>
+                <a href="/newShip.php" class="btn btn-success">Add New Ship</a>
+            </div>
         </div>
 
 <?php require 'layout/footer.php';?>
