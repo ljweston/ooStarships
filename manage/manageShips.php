@@ -1,8 +1,9 @@
 <?php
+require __DIR__.'/../bootstrap.php';
 // Page to manage and display a ship table and link to view ships alone
 // for Edit/ Delete or Add ships
 
-namespace Manage;
+// namespace Manage;
 
 use Service\Container;
 
