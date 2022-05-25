@@ -1,7 +1,8 @@
 <?php
-require __DIR__.'/../bootstrap.php';
 // Page to manage and display a ship table and link to view ships alone
 // for Edit/ Delete or Add ships
+
+namespace Manage;
 
 use Service\Container;
 
@@ -10,7 +11,7 @@ $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
 
-require '../layout/header.php';
+require 'header.php';
 ?>
 
         <div class="container">
@@ -38,7 +39,7 @@ require '../layout/header.php';
                     <?php foreach ($ships as $ship): ?>
                         <tr>
                             <td>
-                                <a href="/viewShip.php?id=<?php echo $ship->getId();?>">
+                                <a href="/manage/viewShip.php?id=<?php echo $ship->getId();?>">
                                     <?php echo $ship->getName(); ?>
                                 </a>
                             </td>
@@ -59,4 +60,4 @@ require '../layout/header.php';
             </table>
         </div>
 
-<?php require '../layout/footer.php';?>
+<?php require 'footer.php';?>
