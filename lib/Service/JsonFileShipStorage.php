@@ -31,4 +31,9 @@ class JsonFileShipStorage implements ShipStorageInterface
 
         return null;
     }
+
+    public function saveShipData($newShipData)
+    {
+        
+    }
 }

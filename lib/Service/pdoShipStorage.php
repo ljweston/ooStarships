@@ -44,4 +44,24 @@ class PdoShipStorage implements ShipStorageInterface
 
         return $shipArray;
     }
+
+    public function saveShipData($newShipData)
+    {
+        // connect to DB
+        $pdo = $this->pdo;
+        $query = 
+            'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
+            VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
+        $statement = $pdo->prepare($query);
+        $statement->bindParam('nameVal', $newShipData['name']);
+        $statement->bindParam('weaponVal', $newShipData['weapon_power']);
+        $statement->bindParam('jediVal', $newShipData['jedi_factor']);
+        $statement->bindParam('strengthVal', $newShipData['strength']);
+        $statement->bindParam('teamVal', $newShipData['team']);
+        // isFunctional data
+
+        $statement->execute();
+
+        // maybe return errors if any ecountered
+    }
 }
