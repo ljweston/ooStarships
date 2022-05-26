@@ -21,7 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // call saveShip() from a shipLoader instance from container instance
     $container = new Container($configuration);
-    $container->saveShip($newShip);
+    $shipLoader = $container->getShipLoader();
+    $shipLoader->saveShip($newShip);
+
+    header('Location: /');
+    die;
 
 }
 
