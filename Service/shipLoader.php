@@ -2,7 +2,6 @@
 
 namespace Service;
 
-use Model\BountyHunterShip;
 use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
