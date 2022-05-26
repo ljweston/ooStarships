@@ -5,27 +5,56 @@ require 'bootstrap.php';
 // file to create, validate, and save to the database.
 use Service\Container;
 
+$errors = [];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // validate data
+    if (!empty($_POST['name'])) {
+        $name = $_POST['name'];
+    } else {
+        $errors[] = 'This ship needs a name';
+    }
 
-    // depending on type of ship we create either a rebel ship or empire ship
+    if (!empty($_POST['weapon-power'])) {
+        $weaponPower = $_POST['weapon-power'];
+    } else {
+        $weaponPower = 0;
+    }
 
-    $newShip = [
-        'name'=> $_POST['name'],
-        'weapon_power'=> $_POST['weapon-power'],
-        'jedi_factor'=> $_POST['jedi-factor'],
-        'strength'=> $_POST['strength'],
-        'team'=> $_POST['team'],
-    ];
+    if (!empty($_POST['jedi-factor'])) {
+        $jediFactor = $_POST['jedi-factor'];
+    } else {
+        $jediFactor = 0;
+    }
 
-    // call saveShip() from a shipLoader instance from container instance
+    if (!empty($_POST['strength'])) {
+        $strength = $_POST['strength'];
+    } else {
+        $strength = 0;
+    }
+
+    if (!empty($_POST['team'])) {
+        $team = $_POST['team'];
+    } else {
+        $errors[] = 'All ships must have an allegiance';
+    }
+
+    if (count($errors) == 0) {
+        $newShip = [
+            'name'=> $name,
+            'weapon_power'=> $weaponPower,
+            'jedi_factor'=> $jediFactor,
+            'strength'=> $strength,
+            'team'=> $team,
+        ];
+
     $container = new Container($configuration);
     $shipLoader = $container->getShipLoader();
     $shipLoader->saveShip($newShip);
 
     header('Location: /');
     die;
+    }
 
 }
 
@@ -43,7 +72,16 @@ require 'layout/header.php';
     <div class="row">
         <div class="col-xs-6">
             <h1>Add a new ship</h1>
-
+            <?php if (count($errors) > 0) :?>
+                <div class="alert alert-danger" role="alert">
+                    <h3>ERROR - Please correct the following...</h3>
+                    <ul>
+                        <?php foreach ($errors as $error) : ?>                    
+                            <li><?php echo $error . "<br />"; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
             <form action="/newShip.php" method="POST">
                 <div class="form-group">
                     <label for="ship-name">Ship Name</label>
