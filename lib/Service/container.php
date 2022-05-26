@@ -68,6 +68,25 @@ class Container
         return $this->shipStorage;
     }
 
+    public function saveShip(array $newShip)
+    {
+        // connect to DB
+        $pdo = $this->getPDO();
+        $query = 
+            'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
+            VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
+        $statement = $pdo->prepare($query);
+        $statement->bindParam('nameVal', $newShip['name']);
+        $statement->bindParam('weaponVal', $newShip['weapon_power']);
+        $statement->bindParam('jediVal', $newShip['jedi_factor']);
+        $statement->bindParam('strengthVal', $newShip['strength']);
+        $statement->bindParam('teamVal', $newShip['team']);
+        // isFunctional data
+
+        $statement->execute();
+
+    }
+
     /**
      * @return BattleManager
      */
