@@ -1,7 +1,6 @@
 <?php
-require __DIR__.'/bootstrap.php';
+require '../layout/header.php';
 
-require 'bootstrap.php';
 // file to create, validate, and save to the database.
 use Service\Container;
 
@@ -14,23 +13,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $errors[] = 'This ship needs a name';
     }
-
-    if (!empty($_POST['weapon-power'])) {
-        $weaponPower = $_POST['weapon-power'];
-    } else {
+    // numeric vals
+    $weaponPower = $_POST['weapon-power'];
+    if (empty($weaponPower)){
         $weaponPower = 0;
+    } elseif (!is_numeric($weaponPower)) {
+        $errors[] = 'Weapon power must be a number';
     }
-
-    if (!empty($_POST['jedi-factor'])) {
-        $jediFactor = $_POST['jedi-factor'];
-    } else {
+    // numeric vals
+    $jediFactor = $_POST['jedi-factor'];
+    if (empty($jediFactor)) {
         $jediFactor = 0;
+    } elseif (!is_numeric($jediFactor)){
+        $errors[] = 'Jedi factor must be a number';
     }
-
-    if (!empty($_POST['strength'])) {
-        $strength = $_POST['strength'];
-    } else {
+    // change to be full health/ MAXHealth
+    // check for empty and numeric values
+    $strength = $_POST['strength'];
+    if (empty($strength)) {
         $strength = 0;
+    } elseif (!is_numeric($strength)) {
+        $errors[] = 'Strength must be a number';
     }
 
     if (!empty($_POST['team'])) {
@@ -59,14 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // create a newShip object to pass to the DB from the below form. 
-
-require 'layout/header.php';
 ?>
 
 <div class="container">
     <ul class="breadcrumb">
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="/manageShips.php">ManageShips</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/manage/ships/index.php">ManageShips</a></li>
         <li>Add ship</li>
     </ul>
     <div class="row">
@@ -82,7 +83,7 @@ require 'layout/header.php';
                     </ul>
                 </div>
             <?php endif; ?>
-            <form action="/newShip.php" method="POST">
+            <form action="/manage/ships/new.php" method="POST">
                 <div class="form-group">
                     <label for="ship-name">Ship Name</label>
                     <input type="text" name="name" id="ship-name">
@@ -112,3 +113,4 @@ require 'layout/header.php';
         </div>
     </div>
 </div>
+<?php require '../layout/footer.php'?>
