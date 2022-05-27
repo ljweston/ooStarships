@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </select>
                 </div>
 
-                <button btn btn-primary><span class="glyphicon glyphicon-plus"></span></button>
+                <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
             </form>
         </div>
     </div>

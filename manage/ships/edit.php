@@ -6,6 +6,8 @@ require '../layout/header.php';
 use Model\AbstractShip;
 use Service\Container;
 
+$container = new Container($configuration);
+$shipLoader = $container->getShipLoader();
 $teams = AbstractShip::getTeams();
 $errors = [];
 
@@ -16,22 +18,24 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id'];
-    $container = new Container($configuration);
-    $shipLoader = $container->getShipLoader();
-    // check if the ID is valid. 
+    $ship = $shipLoader->findOneById($id);
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
     $ship = $shipLoader->findOneById($id);
 }
+    
 ?>
 
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="/manage/ships/index.php">ManageShips</a></li>
-        <li>Edit this ship</li>
+        <!-- <li><a href="/manage/ships/view.php?id="<?php echo $id;?>><?php echo $ship->getName();?></a></li> -->
+        <li>Editing <?php echo $ship->getName();?></li>
     </ul>
     <div class="row">
         <div class="col-xs-6">
-            <h1>Add a new ship</h1>
+            <h1>Edit This Ship</h1>
             <?php if (count($errors) > 0) :?>
                 <div class="alert alert-danger" role="alert">
                     <h3>ERROR - Please correct the following...</h3>
@@ -71,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     </select>
                 </div>
 
-                <button btn btn-primary><span class="glyphicon glyphicon-plus"></span></button>
+                <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
             </form>
         </div>
     </div>
