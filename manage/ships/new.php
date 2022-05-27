@@ -2,8 +2,11 @@
 require '../layout/header.php';
 
 // file to create, validate, and save to the database.
+
+use Model\AbstractShip;
 use Service\Container;
 
+$teams = AbstractShip::getTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,11 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (!is_numeric($strength)) {
         $errors[] = 'Strength must be a number';
     }
-
-    if (!empty($_POST['team'])) {
-        $team = $_POST['team'];
-    } else {
+    
+    $team = $_POST['team'];
+    if (empty($team)) {
         $errors[] = 'All ships must have an allegiance';
+    } elseif (!in_array($team, $teams)) {
+        $errors[] = 'Select a valid team';
     }
 
     if (count($errors) == 0) {
@@ -51,17 +55,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'team'=> $team,
         ];
 
-    $container = new Container($configuration);
-    $shipLoader = $container->getShipLoader();
-    $shipLoader->saveShip($newShip);
-
-    header('Location: /');
-    die;
+        $container = new Container($configuration);
+        $shipLoader = $container->getShipLoader();
+        $shipLoader->saveShip($newShip);
+        // not used in E3
+        header('Location: /manage/ships/index.php');
+        die;
     }
 
 }
 
-// create a newShip object to pass to the DB from the below form. 
 ?>
 
 <div class="container">
@@ -103,8 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>
                     <select name="team" id="ship-team">
-                        <option value="rebel">Rebel Ship</option>
-                        <option value="empire">Empire Ship</option>
+                        <option value="">-- Select One --</option>
+                        <?php foreach ($teams as $team) : ?>
+                            <option value="<?php echo $team?>">
+                                <?php echo ucfirst($team)." Ship"?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
