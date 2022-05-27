@@ -8,13 +8,26 @@ use Service\Container;
 
 $teams = AbstractShip::getTeams();
 $errors = [];
+
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//     $id = $_POST['petId'];
+//     $ship
+// }
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $id = $_GET['id'];
+    $container = new Container($configuration);
+    $shipLoader = $container->getShipLoader();
+    // check if the ID is valid. 
+    $ship = $shipLoader->findOneById($id);
+}
 ?>
 
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="/manage/ships/index.php">ManageShips</a></li>
-        <li>Add ship</li>
+        <li>Edit this ship</li>
     </ul>
     <div class="row">
         <div class="col-xs-6">
@@ -29,32 +42,32 @@ $errors = [];
                     </ul>
                 </div>
             <?php endif; ?>
-            <form action="/manage/ships/new.php" method="POST">
+            <form action="/manage/ships/edit.php" method="POST">
                 <div class="form-group">
                     <label for="ship-name">Ship Name</label>
-                    <input type="text" name="name" id="ship-name" value="<?php echo ''?>">
+                    <input type="text" name="name" id="ship-name" value="<?php echo $ship->getName()?>">
                 </div>
                 <div class="form-group">
                     <label for="ship-weapon-power">Weapon Power</label>
-                    <input type="text" name="weapon-power" id="ship-weapon-power" value="<?php echo ''?>">
+                    <input type="text" name="weapon-power" id="ship-weapon-power" value="<?php echo $ship->getWeaponPower()?>">
                 </div>
                 <div class="form-group">
                     <label for="ship-jedi-factor">Jedi Factor</label>
-                    <input type="text" name="jedi-factor" id="ship-jedi-factor" value="<?php echo ''?>">
+                    <input type="text" name="jedi-factor" id="ship-jedi-factor" value="<?php echo $ship->getJediFactor()?>">
                 </div>
                 <div class="form-group">
                     <label for="ship-strength">Strength</label>
-                    <input type="text" name="strength" id="ship-strength" value="<?php echo ''?>">
+                    <input type="text" name="strength" id="ship-strength" value="<?php echo $ship->getStrength()?>">
                 </div>
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>
                     <select name="team" id="ship-team">
-                        <option value="">-- Select One --</option>
                         <?php foreach ($teams as $team) : ?>
-                            <option value="<?php echo $team?>">
+                            <option value="<?php echo $ship->getType()?>">
                                 <?php echo ucfirst($team)." Ship"?>
                             </option>
                         <?php endforeach; ?>
+                        <option value="">-- Select One --</option>
                     </select>
                 </div>
 

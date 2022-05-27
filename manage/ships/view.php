@@ -60,7 +60,7 @@ $ship = $shipLoader->findOneById($id);
                 </tbody>
             </table>
             <div>
-                <a href="#" class="btn btn-md btn-success">Edit</a>
+                <a href="/manage/ships/edit.php?id=<?php echo $id?>" class="btn btn-md btn-success">Edit</a>
                 <a href="#" class="btn btn-md btn-danger">Delete</a>
             </div>
         <?php endif; ?>
