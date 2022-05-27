@@ -23,4 +23,9 @@ interface ShipStorageInterface
      * @return array
      */
     public function fetchSingleShipData($id);
+
+    /**
+     * Returns nothing, just saves passed in ship data
+     */
+    public function saveShipData($newShipData);
 }

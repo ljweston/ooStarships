@@ -1,3 +1,4 @@
+<?php require __DIR__.'/../../bootstrap.php'; ?>
 <html>
     <head>
         <meta charset="utf-8">

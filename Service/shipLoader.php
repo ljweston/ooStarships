@@ -47,6 +47,11 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
+    public function saveShip($shipData)
+    {
+        $this->shipStorage->saveShipData($shipData);
+    }
+
     // RebelShip threw an error where it's RebelShip was assumed to be in the Service namespace
     private function createShipFromData(array $shipData)
     {

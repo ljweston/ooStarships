@@ -26,7 +26,7 @@ class Ship extends AbstractShip
 
     public function getType()
     {
-        return 'Empire';
+        return AbstractShip::EMPIRE;
     }
 
     // return if the ship is optional, we return the opposite for it's status for readability.

@@ -4,6 +4,9 @@ namespace Model;
 // prevents instantiation of an AbstractShip object
 abstract class AbstractShip
 {
+    const EMPIRE = 'empire';
+    const REBEL = 'rebel';
+
     private $id;
     private $name;
     private $weaponPower = 0;
@@ -19,6 +22,11 @@ abstract class AbstractShip
     public function __construct($name)
     {
         $this->name = $name;
+    }
+
+    public static function getTeams()
+    {
+        return [self::EMPIRE, self::REBEL];
     }
 
     public function sayHello()

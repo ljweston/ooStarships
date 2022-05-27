@@ -13,7 +13,7 @@ class RebelShip extends AbstractShip
 
     public function getType()
     {
-        return 'Rebel';
+        return AbstractShip::REBEL;
     }
 
     public function isFunctional()
