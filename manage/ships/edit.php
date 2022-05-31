@@ -64,15 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // check for the ID of the ship 
 
     if (count($errors) == 0) {
-        // $shipData = [
-        //     'name'=> $name,
-        //     'weapon_power'=> $weaponPower,
-        //     'jedi_factor'=> $jediFactor,
-        //     'strength'=> $strength,
-        //     'team'=> $team,
-        //     'id'=> $id
-        // ];
-
         $ship->setName($name);
         $ship->setWeaponPower($weaponPower);
         $ship->setJediFactor($jediFactor);
