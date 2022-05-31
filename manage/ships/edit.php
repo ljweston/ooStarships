@@ -11,10 +11,57 @@ $shipLoader = $container->getShipLoader();
 $teams = AbstractShip::getTeams();
 $errors = [];
 
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $id = $_POST['petId'];
-//     $ship
-// }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!empty($_POST['name'])) {
+        $name = $_POST['name'];
+    } else {
+        $errors[] = 'This ship needs a name';
+    }
+    // numeric vals
+    $weaponPower = $_POST['weapon-power'];
+    if (empty($weaponPower)){
+        $weaponPower = 0;
+    } elseif (!is_numeric($weaponPower)) {
+        $errors[] = 'Weapon power must be a number';
+    }
+    // numeric vals
+    $jediFactor = $_POST['jedi-factor'];
+    if (empty($jediFactor)) {
+        $jediFactor = 0;
+    } elseif (!is_numeric($jediFactor)){
+        $errors[] = 'Jedi factor must be a number';
+    }
+    // change to be full health/ MAXHealth
+    // check for empty and numeric values
+    $strength = $_POST['strength'];
+    if (empty($strength)) {
+        $strength = 0;
+    } elseif (!is_numeric($strength)) {
+        $errors[] = 'Strength must be a number';
+    }
+    
+    $team = $_POST['team'];
+    if (empty($team)) {
+        $errors[] = 'All ships must have an allegiance';
+    } elseif (!in_array($team, $teams)) {
+        $errors[] = 'Select a valid team';
+    }
+
+    if (count($errors) == 0) {
+        $shipData = [
+            'name'=> $name,
+            'weapon_power'=> $weaponPower,
+            'jedi_factor'=> $jediFactor,
+            'strength'=> $strength,
+            'team'=> $team,
+        ];
+
+        $shipLoader->updateShip($shipData);
+        // not used in E3
+        header('Location: /manage/ships/index.php');
+        die;
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id'];
