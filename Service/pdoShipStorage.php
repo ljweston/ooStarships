@@ -85,4 +85,16 @@ class PdoShipStorage implements ShipStorageInterface
 
         // maybe return errors if any ecountered
     }
+
+    public function deleteShipData($id)
+    {
+        $pdo = $this->pdo;
+        $query =
+            'DELETE FROM ship WHERE id = :idVal';
+
+        $statement = $pdo->prepare($query);
+        $statement->bindParam('idVal', $id);
+
+        $statement->execute();
+    }
 }

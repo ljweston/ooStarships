@@ -57,6 +57,11 @@ class ShipLoader
         $this->shipStorage->updateShipData($shipData);
     }
 
+    public function deleteShip($id)
+    {
+        $this->shipStorage->deleteShipData($id);
+    }
+
     // RebelShip threw an error where it's RebelShip was assumed to be in the Service namespace
     private function createShipFromData(array $shipData)
     {
