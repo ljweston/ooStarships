@@ -86,12 +86,19 @@ class PdoShipStorage implements ShipStorageInterface
             SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, strength = :strengthVal, team = :teamVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
-        $statement->bindParam('nameVal', $shipData['name']);
-        $statement->bindParam('weaponVal', $shipData['weapon_power']);
-        $statement->bindParam('jediVal', $shipData['jedi_factor']);
-        $statement->bindParam('strengthVal', $shipData['strength']);
-        $statement->bindParam('teamVal', $shipData['team']);
-        $statement->bindParam('idVal', $shipData['id']);
+        $statement = $pdo->prepare($query);
+        $name = $shipData->getName();
+        $statement->bindParam('nameVal', $name);
+        $weaponPow = $shipData->getWeaponPower();
+        $statement->bindParam('weaponVal', $weaponPow);
+        $jediFactor = $shipData->getJediFactor();
+        $statement->bindParam('jediVal', $jediFactor);
+        $strength = $shipData->getStrength();
+        $statement->bindParam('strengthVal', $strength);
+        $team = $shipData->getType();
+        $statement->bindParam('teamVal', $team);
+        $id = $shipData->getId();
+        $statement->bindParam('idVal', $id);
         // isFunctional data
 
         $statement->execute();

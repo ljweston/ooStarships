@@ -12,7 +12,7 @@ $teams = AbstractShip::getTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    // set the shipID and instantiate a ship
     if (isset($_POST['shipId'])) {
         $id = $_POST['shipId'];
         $ship = $shipLoader->findOneById($id);
