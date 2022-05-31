@@ -86,7 +86,6 @@ class PdoShipStorage implements ShipStorageInterface
             SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, strength = :strengthVal, team = :teamVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
-        $statement = $pdo->prepare($query);
         $name = $shipData->getName();
         $statement->bindParam('nameVal', $name);
         $weaponPow = $shipData->getWeaponPower();
