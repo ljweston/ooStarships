@@ -3,6 +3,8 @@ require '../layout/header.php';
 
 // file to create, validate, and save to the database.
 
+use Model\RebelShip;
+use Model\Ship;
 use Model\AbstractShip;
 use Service\Container;
 
@@ -11,6 +13,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $name = $_POST['name'];
     if (!empty($_POST['name'])) {
         $name = $_POST['name'];
     } else {
@@ -47,17 +50,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (count($errors) == 0) {
-        $newShip = [
-            'name'=> $name,
-            'weapon_power'=> $weaponPower,
-            'jedi_factor'=> $jediFactor,
-            'strength'=> $strength,
-            'team'=> $team,
-        ];
-
+        // $newShip = [
+        //     'name'=> $name,
+        //     'weapon_power'=> $weaponPower,
+        //     'jedi_factor'=> $jediFactor,
+        //     'strength'=> $strength,
+        //     'team'=> $team,
+        // ];
         $container = new Container($configuration);
         $shipLoader = $container->getShipLoader();
+
+        if ($team == 'rebel') {
+            $newShip = new RebelShip($name);
+        } else {
+            $newShip = new Ship($name);
+        }
+        $newShip->setWeaponPower($weaponPower);
+        $newShip->setJediFactor($jediFactor);
+        $newShip->setStrength($strength);
+        $newShip->setType($team);
+
         $shipLoader->saveShip($newShip);
+        
         // not used in E3
         header('Location: /manage/ships/index.php');
         die;

@@ -47,16 +47,16 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
-    public function saveShip($shipData)
+    public function saveShip(AbstractShip $shipData)
     {
         $this->shipStorage->saveShipData($shipData);
     }
 
-    public function updateShip($shipData)
+    public function updateShip(AbstractShip $shipData)
     {
         $this->shipStorage->updateShipData($shipData);
     }
-
+    // pass in ship obj and grab the ID
     public function deleteShip($id)
     {
         $this->shipStorage->deleteShipData($id);
@@ -69,10 +69,11 @@ class ShipLoader
             $ship = new RebelShip($shipData['name']);
         } else {
             $ship = new Ship($shipData['name']);
-            $ship->setJediFactor($shipData['jedi_factor']);
+            
         }
         $ship->setId($shipData['id']);
         $ship->setWeaponPower($shipData['weapon_power']);
+        $ship->setJediFactor($shipData['jedi_factor']);
         $ship->setStrength($shipData['strength']);
 
         return $ship;

@@ -2,6 +2,8 @@
 
 namespace Service;
 
+use Model\AbstractShip;
+
 // service class to handle PDO queries for ships
 class PdoShipStorage implements ShipStorageInterface
 {
@@ -45,6 +47,12 @@ class PdoShipStorage implements ShipStorageInterface
         return $shipArray;
     }
 
+    /**
+     * @param AbstractShip
+     * 
+     * In this function you must create the fields as variables because bindParam passed by reference already.
+     * Thus we cannot pass a function in as Functions CANNOT be passed by reference.
+     */
     public function saveShipData($newShipData)
     {
         // connect to DB
@@ -53,11 +61,16 @@ class PdoShipStorage implements ShipStorageInterface
             'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
             VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
         $statement = $pdo->prepare($query);
-        $statement->bindParam('nameVal', $newShipData['name']);
-        $statement->bindParam('weaponVal', $newShipData['weapon_power']);
-        $statement->bindParam('jediVal', $newShipData['jedi_factor']);
-        $statement->bindParam('strengthVal', $newShipData['strength']);
-        $statement->bindParam('teamVal', $newShipData['team']);
+        $name = $newShipData->getName();
+        $statement->bindParam('nameVal', $name);
+        $weaponPow = $newShipData->getWeaponPower();
+        $statement->bindParam('weaponVal', $weaponPow);
+        $jediFactor = $newShipData->getJediFactor();
+        $statement->bindParam('jediVal', $jediFactor);
+        $strength = $newShipData->getStrength();
+        $statement->bindParam('strengthVal', $strength);
+        $team = $newShipData->getType();
+        $statement->bindParam('teamVal', $team);
         // isFunctional data
 
         $statement->execute();
