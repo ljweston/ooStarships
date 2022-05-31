@@ -47,6 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Select a valid team';
     }
 
+    // check for the ID of the ship 
+
+    if (isset($_POST['shipId'])) {
+        $id = $_POST['shipId'];
+        if ($shipLoader->findOneById($id) == null) {
+            echo 'SHIP NOT FOUND';
+            die;
+        }
+    } else {
+        throw new \Exception('NO SHIP WITH THIS ID FOUND');
+        // or could catch and die the error
+    }
+
     if (count($errors) == 0) {
         $shipData = [
             'name'=> $name,
@@ -54,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'jedi_factor'=> $jediFactor,
             'strength'=> $strength,
             'team'=> $team,
+            'id'=> $id
         ];
 
         $shipLoader->updateShip($shipData);
@@ -127,7 +141,7 @@ var_dump($ship->getType())
                     </select>
                 </div>
 
-                <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                <button class="btn btn-success" name="shipId" value="<?php echo $id?>"><span class="glyphicon glyphicon-plus"></span></button>
             </form>
         </div>
     </div>
