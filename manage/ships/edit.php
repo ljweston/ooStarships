@@ -12,6 +12,20 @@ $teams = AbstractShip::getTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if (isset($_POST['shipId'])) {
+        $id = $_POST['shipId'];
+        $ship = $shipLoader->findOneById($id);
+        if ($ship == null) {
+            echo 'SHIP NOT FOUND';
+            die;
+        }
+    } else {
+        throw new \Exception('NO SHIP WITH THIS ID FOUND');
+        // or could catch and die the error
+    }
+
+    $name = $_POST['name'];
     if (!empty($_POST['name'])) {
         $name = $_POST['name'];
     } else {
@@ -49,28 +63,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // check for the ID of the ship 
 
-    if (isset($_POST['shipId'])) {
-        $id = $_POST['shipId'];
-        if ($shipLoader->findOneById($id) == null) {
-            echo 'SHIP NOT FOUND';
-            die;
-        }
-    } else {
-        throw new \Exception('NO SHIP WITH THIS ID FOUND');
-        // or could catch and die the error
-    }
-
     if (count($errors) == 0) {
-        $shipData = [
-            'name'=> $name,
-            'weapon_power'=> $weaponPower,
-            'jedi_factor'=> $jediFactor,
-            'strength'=> $strength,
-            'team'=> $team,
-            'id'=> $id
-        ];
+        // $shipData = [
+        //     'name'=> $name,
+        //     'weapon_power'=> $weaponPower,
+        //     'jedi_factor'=> $jediFactor,
+        //     'strength'=> $strength,
+        //     'team'=> $team,
+        //     'id'=> $id
+        // ];
 
-        $shipLoader->updateShip($shipData);
+        $ship->setName($name);
+        $ship->setWeaponPower($weaponPower);
+        $ship->setJediFactor($jediFactor);
+        $ship->setStrength($strength);
+        $ship->setType($team); // may need to change the getType func.
+        // team determines the type of ship created: ship or rebelShip.
+        // Whatever returns from the DB lets us choose our instantiation of ship.
+
+        $shipLoader->updateShip($ship);
         // not used in E3
         header('Location: /manage/ships/index.php');
         die;
@@ -80,12 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id'];
     $ship = $shipLoader->findOneById($id);
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
-    $ship = $shipLoader->findOneById($id);
 }
 
-var_dump($ship->getType())
 ?>
 
 <div class="container">
