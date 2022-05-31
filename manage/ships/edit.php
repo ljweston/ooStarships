@@ -23,15 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_POST['id'];
     $ship = $shipLoader->findOneById($id);
 }
-    
+
+var_dump($ship->getType())
 ?>
 
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="/manage/ships/index.php">ManageShips</a></li>
-        <!-- <li><a href="/manage/ships/view.php?id="<?php echo $id;?>><?php echo $ship->getName();?></a></li> -->
-        <li>Editing <?php echo $ship->getName();?></li>
+        <li><a href="/manage/ships/view.php?id=<?php echo $id;?>"><?php echo $ship->getName();?></a></li>
+        <li>Editing <?php echo $ship->getName();?></li> 
     </ul>
     <div class="row">
         <div class="col-xs-6">
@@ -66,8 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>
                     <select name="team" id="ship-team">
+                        <!-- loaded original/ saved value first -->
+                        <option value="<?php echo $ship->getType()?>">
+                        <?php echo ucfirst($ship->getType())." Ship"?>
+                        </option>
                         <?php foreach ($teams as $team) : ?>
-                            <option value="<?php echo $ship->getType()?>">
+                            <option value="<?php echo $team?>">
                                 <?php echo ucfirst($team)." Ship"?>
                             </option>
                         <?php endforeach; ?>
