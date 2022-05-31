@@ -4,6 +4,8 @@ namespace Model;
 
 class RebelShip extends AbstractShip
 {
+    private $jediFactor;
+
     public function getFavoriteJedi()
     {
         $coolJedis = array('Yoda', 'Ben Kenobi');
@@ -31,6 +33,11 @@ class RebelShip extends AbstractShip
 
     public function getJediFactor()
     {
-        return rand(10, 30);
+        return $this->jediFactor;
+    }
+
+    public function setJediFactor($jediPower)
+    {
+        $this->jediFactor = $jediPower;
     }
 }

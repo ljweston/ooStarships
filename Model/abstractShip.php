@@ -11,8 +11,11 @@ abstract class AbstractShip
     private $name;
     private $weaponPower = 0;
     private $strength = 0;
+    private $type;
 
     abstract public function getJediFactor(); // forces extended class to have this method
+
+    abstract public function setJediFactor($jediPower);
     
     abstract public function getType();
 
@@ -109,6 +112,10 @@ abstract class AbstractShip
         return $this->strength;
     }
 
+    public function setType($team)
+    {
+        $this->type = $team;
+    }
     private function getSecretDoorCodeToTheDeathstar()
     {
         return 'Password';
