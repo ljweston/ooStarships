@@ -12,56 +12,50 @@ $teams = AbstractShip::getTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $name = $_POST['name'];
-    if (!empty($_POST['name'])) {
-        $name = $_POST['name'];
-    } else {
-        $errors[] = 'This ship needs a name';
-    }
-    // numeric vals
-    $weaponPower = $_POST['weapon-power'];
-    if (empty($weaponPower)){
-        $weaponPower = 0;
-    } elseif (!is_numeric($weaponPower)) {
-        $errors[] = 'Weapon power must be a number';
-    }
-    // numeric vals
-    $jediFactor = $_POST['jedi-factor'];
-    if (empty($jediFactor)) {
-        $jediFactor = 0;
-    } elseif (!is_numeric($jediFactor)){
-        $errors[] = 'Jedi factor must be a number';
-    }
-    // change to be full health/ MAXHealth
-    // check for empty and numeric values
-    $strength = $_POST['strength'];
-    if (empty($strength)) {
-        $strength = 0;
-    } elseif (!is_numeric($strength)) {
-        $errors[] = 'Strength must be a number';
-    }
-    
+    // confirm a team has been selected
     $team = $_POST['team'];
     if (empty($team)) {
         $errors[] = 'All ships must have an allegiance';
     } elseif (!in_array($team, $teams)) {
         $errors[] = 'Select a valid team';
     }
+    // make sure a name has been created
+    $name = $_POST['name'];
+    if (empty($name)) {
+        $errors[] = 'This ship needs a name';
+    }
+    // determine instance of ship to create
+    if ($team == 'rebel') {
+        $newShip = new RebelShip($name);
+    } else {
+        $newShip = new Ship($name);
+    }
+    // numeric vals
+    $newShip->setWeaponPower($_POST['weapon-power']);
+    if (empty($newShip->getWeaponPower())) {
+        $newShip->setWeaponPower(0);
+    } elseif (!is_numeric($newShip->getWeaponPower())) {
+        $errors[] = 'Weapon power must be a number';
+    }
+    // numeric vals
+    $newShip->setJediFactor($_POST['jedi-factor']);
+    if (empty($newShip->getJediFactor())) {
+        $newShip->setJediFactor(0);
+    } elseif (!is_numeric($newShip->getJediFactor())){
+        $errors[] = 'Jedi factor must be a number';
+    }
+    // change to be full health/ MAXHealth
+    // check for empty and numeric values
+    $newShip->setStrength($_POST['strength']);
+    if (empty($newShip->getStrength())) {
+        $newShip->setStrength(0);
+    } elseif (!is_numeric($newShip->getStrength())) {
+        $errors[] = 'Strength must be a number';
+    }
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
         $shipLoader = $container->getShipLoader();
-
-        if ($team == 'rebel') {
-            $newShip = new RebelShip($name);
-        } else {
-            $newShip = new Ship($name);
-        }
-        $newShip->setWeaponPower($weaponPower);
-        $newShip->setJediFactor($jediFactor);
-        $newShip->setStrength($strength);
-
         $shipLoader->saveShip($newShip);
         
         // not used in E3
