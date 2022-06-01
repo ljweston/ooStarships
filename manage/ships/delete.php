@@ -5,20 +5,31 @@ require '../layout/header.php';
 use Service\Container;
 
 // pass in id as a submitted value to pass to our query
+$error = false;
+
 if (isset($_POST['deleteShip'])) {
     $id = $_POST['deleteShip'];
 
     $container = new Container($configuration);
     $shipLoader = $container->getShipLoader();
-    // may want to check that the id is valid. If not we usually get an error back, but do not want to interrupt the program.
-    $shipLoader->deleteShip($id);
+    if ($shipLoader->findOneById($id) !== null) {
+        $shipToDelete = $shipLoader->findOneById($id);
+        $shipLoader->deleteShip($shipToDelete);
+    } else {
+        echo '<h1> There is no ship with this ID to delete</h1>';
+        $error = true;
+    }
+    
 } else {
-    echo '<h1> There is no ship to delete</h1>';
+    echo '<h2> There is no ship to delete</h2>';
 }
 ?>
 
 <!-- Display a message to either re-route a user or to return to the battle menu -->
-<h2>This ship has been sent to the scrap yard.</h2>
+<?php 
+    echo (!$error) ? ('<h2>This ship has been sent to the scrap yard.</h2>') 
+    : ('');
+?>
 
 <a href="/index.php">Return to the battle!</a>
 

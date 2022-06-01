@@ -50,13 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (count($errors) == 0) {
-        // $newShip = [
-        //     'name'=> $name,
-        //     'weapon_power'=> $weaponPower,
-        //     'jedi_factor'=> $jediFactor,
-        //     'strength'=> $strength,
-        //     'team'=> $team,
-        // ];
         $container = new Container($configuration);
         $shipLoader = $container->getShipLoader();
 

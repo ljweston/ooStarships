@@ -48,12 +48,11 @@ class PdoShipStorage implements ShipStorageInterface
     }
 
     /**
-     * @param AbstractShip
-     * 
-     * In this function you must create the fields as variables because bindParam passed by reference already.
+     * In this function you must create the fields as variables because bindParam
+     * accepts variables to then be passed by reference already.
      * Thus we cannot pass a function in as Functions CANNOT be passed by reference.
      */
-    public function saveShipData($newShipData)
+    public function saveShip(AbstractShip $ship)
     {
         // connect to DB
         $pdo = $this->pdo;
@@ -61,16 +60,11 @@ class PdoShipStorage implements ShipStorageInterface
             'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
             VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
         $statement = $pdo->prepare($query);
-        $name = $newShipData->getName();
-        $statement->bindParam('nameVal', $name);
-        $weaponPow = $newShipData->getWeaponPower();
-        $statement->bindParam('weaponVal', $weaponPow);
-        $jediFactor = $newShipData->getJediFactor();
-        $statement->bindParam('jediVal', $jediFactor);
-        $strength = $newShipData->getStrength();
-        $statement->bindParam('strengthVal', $strength);
-        $team = $newShipData->getType();
-        $statement->bindParam('teamVal', $team);
+        $statement->bindValue('nameVal', $ship->getName());
+        $statement->bindValue('weaponVal', $ship->getWeaponPower());
+        $statement->bindValue('jediVal', $ship->getJediFactor());
+        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('teamVal', $ship->getType());
         // isFunctional data
 
         $statement->execute();
@@ -78,7 +72,7 @@ class PdoShipStorage implements ShipStorageInterface
         // maybe return errors if any ecountered
     }
 
-    public function updateShipData($shipData)
+    public function updateShip(AbstractShip $ship)
     {
         $pdo = $this->pdo;
         $query = 
@@ -86,18 +80,12 @@ class PdoShipStorage implements ShipStorageInterface
             SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, strength = :strengthVal, team = :teamVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
-        $name = $shipData->getName();
-        $statement->bindParam('nameVal', $name);
-        $weaponPow = $shipData->getWeaponPower();
-        $statement->bindParam('weaponVal', $weaponPow);
-        $jediFactor = $shipData->getJediFactor();
-        $statement->bindParam('jediVal', $jediFactor);
-        $strength = $shipData->getStrength();
-        $statement->bindParam('strengthVal', $strength);
-        $team = $shipData->getType();
-        $statement->bindParam('teamVal', $team);
-        $id = $shipData->getId();
-        $statement->bindParam('idVal', $id);
+        $statement->bindValue('nameVal', $ship->getName());
+        $statement->bindValue('weaponVal', $ship->getWeaponPower());
+        $statement->bindValue('jediVal', $ship->getJediFactor());
+        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('teamVal', $ship->getType());
+        $statement->bindValue('idVal', $ship->getId());
         // isFunctional data
 
         $statement->execute();
@@ -105,14 +93,14 @@ class PdoShipStorage implements ShipStorageInterface
         // maybe return errors if any ecountered
     }
 
-    public function deleteShipData($id)
+    public function deleteShip(AbstractShip $ship)
     {
         $pdo = $this->pdo;
         $query =
             'DELETE FROM ship WHERE id = :idVal';
 
         $statement = $pdo->prepare($query);
-        $statement->bindParam('idVal', $id);
+        $statement->bindValue('idVal', $ship->getId());
 
         $statement->execute();
     }
