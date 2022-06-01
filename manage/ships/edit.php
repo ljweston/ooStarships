@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $name = $_POST['name'];
-    if (!empty($_POST['name'])) {
+    if (!empty($name)) {
         $name = $_POST['name'];
     } else {
         $errors[] = 'This ship needs a name';
