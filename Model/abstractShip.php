@@ -29,16 +29,6 @@ abstract class AbstractShip
         return [self::EMPIRE, self::REBEL];
     }
 
-    public function getJediFactor()
-    {
-        return $this->jediFactor;
-    }
-
-    public function setJediFactor($jediPower)
-    {
-        $this->jediFactor = $jediPower;
-    }
-
     public function sayHello()
     {
         echo 'HELLO';
@@ -100,23 +90,27 @@ abstract class AbstractShip
 
     public function setWeaponPower($weaponPow)
     {
-        if (!is_numeric($weaponPow)) {
-            throw new \Exception('Invalid weapon power passed '.$weaponPow);
-        }
         $this->weaponPower = $weaponPow;
     }
 
     public function setStrength($strength)
     {
-        if (!is_numeric($strength)) {
-            throw new \Exception('Invalid strength passed '.$strength);
-        }
         $this-> strength = $strength;
     }
 
     public function getStrength()
     {
         return $this->strength;
+    }
+
+    public function getJediFactor()
+    {
+        return $this->jediFactor;
+    }
+
+    public function setJediFactor($jediPower)
+    {
+        $this->jediFactor = $jediPower;
     }
 
     private function getSecretDoorCodeToTheDeathstar()
