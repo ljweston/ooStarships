@@ -47,19 +47,19 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
-    public function saveShip(AbstractShip $shipData)
+    public function saveShip(AbstractShip $ship)
     {
-        $this->shipStorage->saveShipData($shipData);
+        $this->shipStorage->saveShip($ship);
     }
 
-    public function updateShip(AbstractShip $shipData)
+    public function updateShip(AbstractShip $ship)
     {
-        $this->shipStorage->updateShipData($shipData);
+        $this->shipStorage->updateShip($ship);
     }
     // pass in ship obj and grab the ID
-    public function deleteShip($id)
+    public function deleteShip(AbstractShip $ship)
     {
-        $this->shipStorage->deleteShipData($id);
+        $this->shipStorage->deleteShip($ship);
     }
 
     // RebelShip threw an error where it's RebelShip was assumed to be in the Service namespace

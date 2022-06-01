@@ -1,6 +1,8 @@
 <?php
 namespace Service;
 
+use Model\AbstractShip;
+
 // Can be passed around and won't worry about the object that is returned
 interface ShipStorageInterface
 {
@@ -27,5 +29,9 @@ interface ShipStorageInterface
     /**
      * Returns nothing, just saves passed in ship data
      */
-    public function saveShipData($newShipData);
+    public function saveShip(AbstractShip $newShip);
+
+    public function updateShip(AbstractShip $ship);
+
+    public function deleteShip(AbstractShip $ship);
 }

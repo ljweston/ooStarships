@@ -53,13 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (!is_numeric($strength)) {
         $errors[] = 'Strength must be a number';
     }
-    
-    $team = $_POST['team'];
-    if (empty($team)) {
-        $errors[] = 'All ships must have an allegiance';
-    } elseif (!in_array($team, $teams)) {
-        $errors[] = 'Select a valid team';
-    }
 
     // check for the ID of the ship 
 
@@ -67,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ship->setName($name);
         $ship->setWeaponPower($weaponPower);
         $ship->setJediFactor($jediFactor);
-        $ship->setStrength($strength);
-        $ship->setType($team); // may need to change the getType func.
+        $ship->setStrength($strength); // may need to change the getType func.
         // team determines the type of ship created: ship or rebelShip.
         // Whatever returns from the DB lets us choose our instantiation of ship.
 
@@ -125,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 </div>
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>
-                    <select name="team" id="ship-team">
+                    <select name="team" id="ship-team" disabled>
                         <!-- loaded original/ saved value first -->
                         <option value="<?php echo $ship->getType()?>">
                         <?php echo ucfirst($ship->getType())." Ship"?>
