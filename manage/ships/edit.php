@@ -25,45 +25,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // or could catch and die the error
     }
 
-    $name = $_POST['name'];
-    if (!empty($name)) {
-        $name = $_POST['name'];
-    } else {
+    $ship->setName($_POST['name']);
+    if (empty($ship->getName())) {
         $errors[] = 'This ship needs a name';
     }
-    // numeric vals
-    $weaponPower = $_POST['weapon-power'];
-    if (empty($weaponPower)){
-        $weaponPower = 0;
-    } elseif (!is_numeric($weaponPower)) {
+    
+    $ship->setWeaponPower($_POST['weapon-power']);
+    if (empty($ship->getWeaponPower())){
+        $ship->setWeaponPower(0);
+    } elseif (!is_numeric($ship->getWeaponPower())) {
         $errors[] = 'Weapon power must be a number';
     }
+
     // numeric vals
-    $jediFactor = $_POST['jedi-factor'];
-    if (empty($jediFactor)) {
-        $jediFactor = 0;
-    } elseif (!is_numeric($jediFactor)){
+    $ship->setJediFactor($_POST['jedi-factor']);
+    if (empty($ship->getJediFactor())) {
+        $ship->setJediFactor(0);
+    } elseif (!is_numeric($ship->getJediFactor())){
         $errors[] = 'Jedi factor must be a number';
     }
-    // change to be full health/ MAXHealth
-    // check for empty and numeric values
-    $strength = $_POST['strength'];
-    if (empty($strength)) {
-        $strength = 0;
-    } elseif (!is_numeric($strength)) {
+
+    // future feature of ship health
+    $ship->setStrength($_POST['strength']);
+    if (empty($ship->getStrength())) {
+        $ship->setStrength(0);
+    } elseif (!is_numeric($ship->getStrength())) {
         $errors[] = 'Strength must be a number';
     }
 
     // check for the ID of the ship 
 
     if (count($errors) == 0) {
-        $ship->setName($name);
-        $ship->setWeaponPower($weaponPower);
-        $ship->setJediFactor($jediFactor);
-        $ship->setStrength($strength); // may need to change the getType func.
-        // team determines the type of ship created: ship or rebelShip.
-        // Whatever returns from the DB lets us choose our instantiation of ship.
-
         $shipLoader->updateShip($ship);
         // not used in E3
         header('Location: /manage/ships/index.php');
