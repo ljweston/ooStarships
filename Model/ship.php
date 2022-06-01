@@ -5,7 +5,6 @@ namespace Model;
 class Ship extends AbstractShip
 {
     private $underRepair;
-    private $type;
 
     public function __construct($name)
     {
@@ -17,11 +16,6 @@ class Ship extends AbstractShip
     public function getType()
     {
         return AbstractShip::EMPIRE;
-    }
-
-    public function setType($team)
-    {
-        $this->type = $team;
     }
 
     // return if the ship is optional, we return the opposite for it's status for readability.
