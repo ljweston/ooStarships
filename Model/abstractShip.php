@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+// MAYBE: Change this to an interface
 // prevents instantiation of an AbstractShip object
 abstract class AbstractShip
 {
@@ -11,14 +12,9 @@ abstract class AbstractShip
     private $name;
     private $weaponPower = 0;
     private $strength = 0;
-
-    abstract public function getJediFactor(); // forces extended class to have this method
-
-    abstract public function setJediFactor($jediPower);
+    private $jediFactor = 0;
     
     abstract public function getType();
-
-    abstract public function setType($team);
 
     abstract public function isFunctional();
 
@@ -31,6 +27,16 @@ abstract class AbstractShip
     public static function getTeams()
     {
         return [self::EMPIRE, self::REBEL];
+    }
+
+    public function getJediFactor()
+    {
+        return $this->jediFactor;
+    }
+
+    public function setJediFactor($jediPower)
+    {
+        $this->jediFactor = $jediPower;
     }
 
     public function sayHello()

@@ -16,8 +16,8 @@ class RebelShip extends AbstractShip
 
     public function getType()
     {
-        // return AbstractShip::REBEL;
-        return $this->type;
+        return AbstractShip::REBEL;
+        // return $this->type;
     }
 
     public function setType($team)

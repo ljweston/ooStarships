@@ -15,20 +15,9 @@ class Ship extends AbstractShip
         $this->underRepair = mt_rand(1, 100) < 30;
     }
 
-    public function getJediFactor()
-    {
-        return $this->jediFactor;
-    }
-
-    public function setJediFactor($jediPow)
-    {
-        $this->jediFactor = $jediPow;
-    }
-
     public function getType()
     {
-        // return AbstractShip::EMPIRE;
-        return $this->type;
+        return AbstractShip::EMPIRE;
     }
 
     public function setType($team)
