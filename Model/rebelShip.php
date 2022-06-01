@@ -4,6 +4,7 @@ namespace Model;
 
 class RebelShip extends AbstractShip
 {
+
     public function getFavoriteJedi()
     {
         $coolJedis = array('Yoda', 'Ben Kenobi');
@@ -14,6 +15,7 @@ class RebelShip extends AbstractShip
     public function getType()
     {
         return AbstractShip::REBEL;
+        // return $this->type;
     }
 
     public function isFunctional()
@@ -27,10 +29,5 @@ class RebelShip extends AbstractShip
         $val .= ' (Rebel)';
 
         return $val;
-    }
-
-    public function getJediFactor()
-    {
-        return rand(10, 30);
     }
 }

@@ -60,8 +60,11 @@ $ship = $shipLoader->findOneById($id);
                 </tbody>
             </table>
             <div>
-                <a href="#" class="btn btn-md btn-success">Edit</a>
-                <a href="#" class="btn btn-md btn-danger">Delete</a>
+                <a href="/manage/ships/edit.php?id=<?php echo $id?>" class="btn btn-md btn-success">Edit</a>
+                <form action="/manage/ships/delete.php" method="POST">
+                    <button class="btn btn-md btn-danger" name="deleteShip" value="<?php echo $id?>">Delete</button>
+                </form>
+                
             </div>
         <?php endif; ?>
     </div>

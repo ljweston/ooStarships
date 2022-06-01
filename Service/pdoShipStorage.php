@@ -2,6 +2,8 @@
 
 namespace Service;
 
+use Model\AbstractShip;
+
 // service class to handle PDO queries for ships
 class PdoShipStorage implements ShipStorageInterface
 {
@@ -45,7 +47,12 @@ class PdoShipStorage implements ShipStorageInterface
         return $shipArray;
     }
 
-    public function saveShipData($newShipData)
+    /**
+     * In this function you must create the fields as variables because bindParam
+     * accepts variables to then be passed by reference already.
+     * Thus we cannot pass a function in as Functions CANNOT be passed by reference.
+     */
+    public function saveShip(AbstractShip $ship)
     {
         // connect to DB
         $pdo = $this->pdo;
@@ -53,15 +60,48 @@ class PdoShipStorage implements ShipStorageInterface
             'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
             VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
         $statement = $pdo->prepare($query);
-        $statement->bindParam('nameVal', $newShipData['name']);
-        $statement->bindParam('weaponVal', $newShipData['weapon_power']);
-        $statement->bindParam('jediVal', $newShipData['jedi_factor']);
-        $statement->bindParam('strengthVal', $newShipData['strength']);
-        $statement->bindParam('teamVal', $newShipData['team']);
+        $statement->bindValue('nameVal', $ship->getName());
+        $statement->bindValue('weaponVal', $ship->getWeaponPower());
+        $statement->bindValue('jediVal', $ship->getJediFactor());
+        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('teamVal', $ship->getType());
         // isFunctional data
 
         $statement->execute();
 
         // maybe return errors if any ecountered
+    }
+
+    public function updateShip(AbstractShip $ship)
+    {
+        $pdo = $this->pdo;
+        $query = 
+            'UPDATE OOPShips.ship
+            SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, strength = :strengthVal, team = :teamVal
+            WHERE id = :idVal';
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('nameVal', $ship->getName());
+        $statement->bindValue('weaponVal', $ship->getWeaponPower());
+        $statement->bindValue('jediVal', $ship->getJediFactor());
+        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('teamVal', $ship->getType());
+        $statement->bindValue('idVal', $ship->getId());
+        // isFunctional data
+
+        $statement->execute();
+
+        // maybe return errors if any ecountered
+    }
+
+    public function deleteShip(AbstractShip $ship)
+    {
+        $pdo = $this->pdo;
+        $query =
+            'DELETE FROM ship WHERE id = :idVal';
+
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('idVal', $ship->getId());
+
+        $statement->execute();
     }
 }

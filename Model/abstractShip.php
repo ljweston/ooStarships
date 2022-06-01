@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+// MAYBE: Change this to an interface
 // prevents instantiation of an AbstractShip object
 abstract class AbstractShip
 {
@@ -11,8 +12,7 @@ abstract class AbstractShip
     private $name;
     private $weaponPower = 0;
     private $strength = 0;
-
-    abstract public function getJediFactor(); // forces extended class to have this method
+    private $jediFactor = 0;
     
     abstract public function getType();
 
@@ -90,23 +90,27 @@ abstract class AbstractShip
 
     public function setWeaponPower($weaponPow)
     {
-        if (!is_numeric($weaponPow)) {
-            throw new \Exception('Invalid weapon power passed '.$weaponPow);
-        }
         $this->weaponPower = $weaponPow;
     }
 
     public function setStrength($strength)
     {
-        if (!is_numeric($strength)) {
-            throw new \Exception('Invalid strength passed '.$strength);
-        }
         $this-> strength = $strength;
     }
 
     public function getStrength()
     {
         return $this->strength;
+    }
+
+    public function getJediFactor()
+    {
+        return $this->jediFactor;
+    }
+
+    public function setJediFactor($jediPower)
+    {
+        $this->jediFactor = $jediPower;
     }
 
     private function getSecretDoorCodeToTheDeathstar()

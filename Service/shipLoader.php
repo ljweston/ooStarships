@@ -47,22 +47,33 @@ class ShipLoader
         return $this->createShipFromData($shipArray);
     }
 
-    public function saveShip($shipData)
+    public function saveShip(AbstractShip $ship)
     {
-        $this->shipStorage->saveShipData($shipData);
+        $this->shipStorage->saveShip($ship);
+    }
+
+    public function updateShip(AbstractShip $ship)
+    {
+        $this->shipStorage->updateShip($ship);
+    }
+    // pass in ship obj and grab the ID
+    public function deleteShip(AbstractShip $ship)
+    {
+        $this->shipStorage->deleteShip($ship);
     }
 
     // RebelShip threw an error where it's RebelShip was assumed to be in the Service namespace
     private function createShipFromData(array $shipData)
     {
         if ($shipData['team'] == 'rebel') {
-            $ship = new RebelShip($shipData['name']);
+            $ship = new RebelShip($shipData['name']); 
         } else {
             $ship = new Ship($shipData['name']);
-            $ship->setJediFactor($shipData['jedi_factor']);
+            
         }
         $ship->setId($shipData['id']);
         $ship->setWeaponPower($shipData['weapon_power']);
+        $ship->setJediFactor($shipData['jedi_factor']);
         $ship->setStrength($shipData['strength']);
 
         return $ship;
