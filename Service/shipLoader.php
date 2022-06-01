@@ -71,7 +71,6 @@ class ShipLoader
             $ship = new Ship($shipData['name']);
             
         }
-        $ship->getType(); 
         $ship->setId($shipData['id']);
         $ship->setWeaponPower($shipData['weapon_power']);
         $ship->setJediFactor($shipData['jedi_factor']);
