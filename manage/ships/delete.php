@@ -12,9 +12,9 @@ if (isset($_POST['deleteShip'])) {
 
     $container = new Container($configuration);
     $shipLoader = $container->getShipLoader();
-    if ($shipLoader->findOneById($id) !== null) {
-        $shipToDelete = $shipLoader->findOneById($id);
-        $shipLoader->deleteShip($shipToDelete);
+    $ship = $shipLoader->findOneById($id);
+    if ($ship !== null) {
+        $shipLoader->deleteShip($ship);
     } else {
         echo '<h1> There is no ship with this ID to delete</h1>';
         $error = true;
