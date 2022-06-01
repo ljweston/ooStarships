@@ -4,7 +4,6 @@ namespace Model;
 // Model Class
 class Ship extends AbstractShip
 {
-    private $jediFactor = 0;
     private $underRepair;
     private $type;
 

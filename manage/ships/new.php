@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $newShip->setWeaponPower($weaponPower);
         $newShip->setJediFactor($jediFactor);
         $newShip->setStrength($strength);
-        $newShip->setType($team);
 
         $shipLoader->saveShip($newShip);
         

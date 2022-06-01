@@ -4,8 +4,6 @@ namespace Model;
 
 class RebelShip extends AbstractShip
 {
-    private $jediFactor;
-    private $type;
 
     public function getFavoriteJedi()
     {
@@ -20,11 +18,6 @@ class RebelShip extends AbstractShip
         // return $this->type;
     }
 
-    public function setType($team)
-    {
-        $this->type = $team;
-    }
-
     public function isFunctional()
     {
         return true;
@@ -36,15 +29,5 @@ class RebelShip extends AbstractShip
         $val .= ' (Rebel)';
 
         return $val;
-    }
-
-    public function getJediFactor()
-    {
-        return $this->jediFactor;
-    }
-
-    public function setJediFactor($jediPower)
-    {
-        $this->jediFactor = $jediPower;
     }
 }
