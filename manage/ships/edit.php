@@ -53,8 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Max Health must be a number';
     }
 
-    // check for the ID of the ship 
-
     if (count($errors) == 0) {
         $shipLoader->updateShip($ship);
         // not used in E3

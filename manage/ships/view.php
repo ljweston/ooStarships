@@ -14,6 +14,8 @@ $shipLoader = $container->getShipLoader();
 // check if the ID is valid. 
 $ship = $shipLoader->findOneById($id);
 
+// function calls to handle repair button press
+
 ?>
 
     <div class="container">
