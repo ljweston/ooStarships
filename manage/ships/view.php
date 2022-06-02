@@ -14,8 +14,6 @@ $shipLoader = $container->getShipLoader();
 // check if the ID is valid. 
 $ship = $shipLoader->findOneById($id);
 
-// function calls to handle repair button press
-
 ?>
 
     <div class="container">
@@ -50,6 +48,10 @@ $ship = $shipLoader->findOneById($id);
                         <td><?php echo $ship->getJediFactor()?></td>
                     </tr>
                     <tr>
+                        <th>Current Health:</th>
+                        <td><?php echo $ship->getCurrentHealth()?></td>
+                    </tr>
+                    <tr>
                         <th>Repair Status:</th>
                         <td>
                             <?php if ($ship->isFunctional()) : ?>
@@ -63,6 +65,7 @@ $ship = $shipLoader->findOneById($id);
             </table>
             <div>
                 <a href="/manage/ships/edit.php?id=<?php echo $id?>" class="btn btn-md btn-success">Edit</a>
+                <a href="/manage/ships/repair.php?id=<?php echo $id?>" class="btn btn-md btn-primary">Repair</a>
                 <form action="/manage/ships/delete.php" method="POST">
                     <button class="btn btn-md btn-danger" name="deleteShip" value="<?php echo $id?>">Delete</button>
                 </form>
