@@ -34,7 +34,7 @@ interface ShipStorageInterface
 
     public function updateShip(AbstractShip $ship);
 
-    public function repairShip(AbstractShip $ship);
+    public function repairShip($id);
 
     public function deleteShip(AbstractShip $ship);
 }
