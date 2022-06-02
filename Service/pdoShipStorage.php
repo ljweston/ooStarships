@@ -57,14 +57,15 @@ class PdoShipStorage implements ShipStorageInterface
         // connect to DB
         $pdo = $this->pdo;
         $query = 
-            'INSERT INTO ship(name, weapon_power, jedi_factor, max_health, team)
-            VALUES(:nameVal, :weaponVal, :jediVal, :maxHealthVal, :teamVal)';
+            'INSERT INTO ship(name, weapon_power, jedi_factor, max_health, team, current_health)
+            VALUES(:nameVal, :weaponVal, :jediVal, :maxHealthVal, :teamVal, :currentHealthVal)';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
         $statement->bindValue('weaponVal', $ship->getWeaponPower());
         $statement->bindValue('jediVal', $ship->getJediFactor());
         $statement->bindValue('maxHealthVal', $ship->getMaxHealth());
         $statement->bindValue('teamVal', $ship->getType());
+        $statement->bindValue('currentHealthVal', $ship->getCurrentHealth());
         // isFunctional data
 
         $statement->execute();
@@ -77,7 +78,8 @@ class PdoShipStorage implements ShipStorageInterface
         $pdo = $this->pdo;
         $query = 
             'UPDATE OOPShips.ship
-            SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, max_health = :maxHealthVal, team = :teamVal
+            SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal,
+            max_health = :maxHealthVal, team = :teamVal, current_health = :currentHealthVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
@@ -85,6 +87,7 @@ class PdoShipStorage implements ShipStorageInterface
         $statement->bindValue('jediVal', $ship->getJediFactor());
         $statement->bindValue('maxHealthVal', $ship->getMaxHealth());
         $statement->bindValue('teamVal', $ship->getType());
+        $statement->bindValue('currentHealthVal', $ship->getCurrentHealth());
         $statement->bindValue('idVal', $ship->getId());
         // isFunctional data
 

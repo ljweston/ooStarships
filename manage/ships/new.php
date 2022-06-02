@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (!is_numeric($newShip->getMaxHealth())) {
         $errors[] = 'Max Health must be a number';
     }
+    $newShip->setCurrentHealth($newShip->getMaxHealth());
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
