@@ -46,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // future feature of ship health
-    $ship->setStrength($_POST['strength']);
-    if (empty($ship->getStrength())) {
-        $ship->setStrength(0);
-    } elseif (!is_numeric($ship->getStrength())) {
-        $errors[] = 'Strength must be a number';
+    $ship->setMaxHealth($_POST['health']);
+    if (empty($ship->getMaxHealth())) {
+        $ship->setMaxHealth(0);
+    } elseif (!is_numeric($ship->getMaxHealth())) {
+        $errors[] = 'Max Health must be a number';
     }
 
     // check for the ID of the ship 
@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <input type="text" name="jedi-factor" id="ship-jedi-factor" value="<?php echo $ship->getJediFactor()?>">
                 </div>
                 <div class="form-group">
-                    <label for="ship-strength">Strength</label>
-                    <input type="text" name="strength" id="ship-strength" value="<?php echo $ship->getStrength()?>">
+                    <label for="ship-health">Max Health</label>
+                    <input type="text" name="health" id="ship-health" value="<?php echo $ship->getMaxHealth()?>">
                 </div>
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>

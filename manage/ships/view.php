@@ -40,8 +40,8 @@ $ship = $shipLoader->findOneById($id);
                         <td><?php echo $ship->getWeaponPower()?></td>
                     </tr>
                     <tr>
-                        <th>Strength:</th>
-                        <td><?php echo $ship->getStrength()?></td>
+                        <th>Max Health:</th>
+                        <td><?php echo $ship->getMaxHealth()?></td>
                     </tr>
                     <tr>
                         <th>Jedi Power:</th>

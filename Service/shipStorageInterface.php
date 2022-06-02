@@ -11,8 +11,9 @@ interface ShipStorageInterface
      *  * id
      *  * name
      *  * weapon_power
-     *  * strength
+     *  * max_health
      *  * team
+     *  * current_health
      *
      * @return array
      */

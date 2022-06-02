@@ -49,7 +49,7 @@ require 'layout/header.php';
                         <th>Ship</th>
                         <th>Weapon Power</th>
                         <th>Jedi Factor</th>
-                        <th>Strength</th>
+                        <th>Max Health</th>
                         <th>Type</th>
                         <th></th>
                     </tr>
@@ -60,7 +60,7 @@ require 'layout/header.php';
                             <td><?php echo $ship->getName(); ?></td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
-                            <td><?php echo $ship->getStrength(); ?></td>
+                            <td><?php echo $ship->getMaxHealth(); ?></td>
                             <td><?php echo $ship->getType(); ?></td>
                             <td>
                                 <?php if ($ship->isFunctional()) : ?>

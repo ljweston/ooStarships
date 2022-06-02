@@ -57,13 +57,13 @@ class PdoShipStorage implements ShipStorageInterface
         // connect to DB
         $pdo = $this->pdo;
         $query = 
-            'INSERT INTO ship(name, weapon_power, jedi_factor, strength, team)
-            VALUES(:nameVal, :weaponVal, :jediVal, :strengthVal, :teamVal)';
+            'INSERT INTO ship(name, weapon_power, jedi_factor, max_health, team)
+            VALUES(:nameVal, :weaponVal, :jediVal, :maxHealthVal, :teamVal)';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
         $statement->bindValue('weaponVal', $ship->getWeaponPower());
         $statement->bindValue('jediVal', $ship->getJediFactor());
-        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('maxHealthVal', $ship->getMaxHealth());
         $statement->bindValue('teamVal', $ship->getType());
         // isFunctional data
 
@@ -77,13 +77,13 @@ class PdoShipStorage implements ShipStorageInterface
         $pdo = $this->pdo;
         $query = 
             'UPDATE OOPShips.ship
-            SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, strength = :strengthVal, team = :teamVal
+            SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal, max_health = :maxHealthVal, team = :teamVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
         $statement->bindValue('weaponVal', $ship->getWeaponPower());
         $statement->bindValue('jediVal', $ship->getJediFactor());
-        $statement->bindValue('strengthVal', $ship->getStrength());
+        $statement->bindValue('maxHealthVal', $ship->getMaxHealth());
         $statement->bindValue('teamVal', $ship->getType());
         $statement->bindValue('idVal', $ship->getId());
         // isFunctional data

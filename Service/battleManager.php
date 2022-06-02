@@ -18,9 +18,16 @@ class BattleManager
          */
         public function battle(AbstractShip $ship1, int $ship1Quantity, AbstractShip $ship2, int $ship2Quantity, $battleType)
         {
-            // TODO: health management
-            $ship1Health = $ship1->getStrength() * $ship1Quantity;
-            $ship2Health = $ship2->getStrength() * $ship2Quantity;
+            /**
+             * TODO: health management
+             * 
+             * set currentHealth = to the maxHealth/ check the currentVal and repair status
+             * 
+             * TODODO: Battle status. Display battle data as it occurs
+             */
+            
+            $ship1Health = $ship1->getMaxHealth() * $ship1Quantity;
+            $ship2Health = $ship2->getMaxHealth() * $ship2Quantity;
 
             $ship1UsedJediPowers = false;
             $ship2UsedJediPowers = false;
@@ -52,9 +59,13 @@ class BattleManager
                 }
                 $i++;
             }
+            /**
+             * Below logic will change to use the "currentHealth" data.
+             * Will need to track damage above and change is below on each pass.
+             */
             // We are now effecting/ changing data PASS BY REFERENCE
-            $ship1->setStrength($ship1Health);
-            $ship2->setStrength($ship2Health);
+            $ship1->setMaxHealth($ship1Health);
+            $ship2->setMaxHealth($ship2Health);
 
             if ($ship1Health <= 0 && $ship2Health <= 0) {
                 // they destroyed each other

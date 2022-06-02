@@ -56,7 +56,7 @@ abstract class AbstractShip
         }
     }
 
-    public function givenShipMoreStrength($givenShip)
+    public function givenShipMoreHealth($givenShip)
     {
         // compare current ship to passed in ship
         return $givenShip->maxHealth > $this->maxHealth;
