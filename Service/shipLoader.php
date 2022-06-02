@@ -56,7 +56,11 @@ class ShipLoader
     {
         $this->shipStorage->updateShip($ship);
     }
-    // pass in ship obj and grab the ID
+
+    public function repairShip(AbstractShip $ship)
+    {
+        $this->shipStorage->repairShip($ship);
+    }
     public function deleteShip(AbstractShip $ship)
     {
         $this->shipStorage->deleteShip($ship);
@@ -75,6 +79,7 @@ class ShipLoader
         $ship->setWeaponPower($shipData['weapon_power']);
         $ship->setJediFactor($shipData['jedi_factor']);
         $ship->setMaxHealth($shipData['max_health']);
+        $ship->setCurrentHealth($shipData['current_health']);
         // set a currentHealth
         return $ship;
     }
