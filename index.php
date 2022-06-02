@@ -49,7 +49,7 @@ require 'layout/header.php';
                         <th>Ship</th>
                         <th>Weapon Power</th>
                         <th>Jedi Factor</th>
-                        <th>Max Health</th>
+                        <th>Health</th>
                         <th>Type</th>
                         <th></th>
                     </tr>
@@ -60,7 +60,7 @@ require 'layout/header.php';
                             <td><?php echo $ship->getName(); ?></td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
-                            <td><?php echo $ship->getMaxHealth(); ?></td>
+                            <td><?php echo $ship->getCurrentHealth().'/'.$ship->getMaxHealth(); ?></td>
                             <td><?php echo $ship->getType(); ?></td>
                             <td>
                                 <?php if ($ship->isFunctional()) : ?>
@@ -101,7 +101,7 @@ require 'layout/header.php';
                             <?php endforeach; ?>
                         </select>
                         <br>
-
+                        <?php var_dump(BattleManager::TYPE_NORMAL)?>
                         <div class="text-center">
                             <label for="battle_type">Battle Type</label>
                             <select name="battle_type" id="battle_type" class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle">
