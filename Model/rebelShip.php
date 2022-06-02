@@ -23,7 +23,7 @@ class RebelShip extends AbstractShip
         /**
          * check current health of the ship parent::getCurrentHealth()
          */
-        if (parent::getCurrentHealth() <= ((10/100) * parent::getMaxHealth())) {
+        if ($this->getCurrentHealth() <= ((10/100) * $this->getMaxHealth())) {
             return false;
         } else {
             return true;
