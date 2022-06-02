@@ -48,7 +48,7 @@ abstract class AbstractShip
                 $this->name,
                 $this->weaponPower,
                 $this->getJediFactor(),
-                $this->maxHealth
+                $this->currentHealth
             );
         } else {
             return sprintf(
@@ -56,16 +56,11 @@ abstract class AbstractShip
                 $this->name,
                 $this->weaponPower,
                 $this->getJediFactor(),
-                $this->maxHealth
+                $this->currentHealth
             );
         }
     }
 
-    public function givenShipMoreHealth($givenShip)
-    {
-        // compare current ship to passed in ship
-        return $givenShip->maxHealth > $this->maxHealth;
-    }
     /**
      * @return integer
      */
