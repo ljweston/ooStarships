@@ -101,7 +101,6 @@ require 'layout/header.php';
                             <?php endforeach; ?>
                         </select>
                         <br>
-                        <?php var_dump(BattleManager::TYPE_NORMAL)?>
                         <div class="text-center">
                             <label for="battle_type">Battle Type</label>
                             <select name="battle_type" id="battle_type" class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle">
