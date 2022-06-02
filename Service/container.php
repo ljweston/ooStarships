@@ -74,7 +74,7 @@ class Container
     public function getBattleManager()
     {
         if ($this->battleManager === null) {
-            $this->battleManager = new BattleManager();
+            $this->battleManager = new BattleManager($this->configuration);
         }
 
         return $this->battleManager;
