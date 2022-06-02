@@ -11,8 +11,9 @@ abstract class AbstractShip
     private $id;
     private $name;
     private $weaponPower = 0;
-    private $strength = 0;
+    private $maxHealth = 0;
     private $jediFactor = 0;
+    private $currentHealth;
     
     abstract public function getType();
 
@@ -42,7 +43,7 @@ abstract class AbstractShip
                 $this->name,
                 $this->weaponPower,
                 $this->getJediFactor(),
-                $this->strength
+                $this->maxHealth
             );
         } else {
             return sprintf(
@@ -50,7 +51,7 @@ abstract class AbstractShip
                 $this->name,
                 $this->weaponPower,
                 $this->getJediFactor(),
-                $this->strength
+                $this->maxHealth
             );
         }
     }
@@ -58,7 +59,7 @@ abstract class AbstractShip
     public function givenShipMoreStrength($givenShip)
     {
         // compare current ship to passed in ship
-        return $givenShip->strength > $this->strength;
+        return $givenShip->maxHealth > $this->maxHealth;
     }
     /**
      * @return integer
@@ -93,14 +94,14 @@ abstract class AbstractShip
         $this->weaponPower = $weaponPow;
     }
 
-    public function setStrength($strength)
+    public function setMaxHealth($maxHealth)
     {
-        $this-> strength = $strength;
+        $this-> maxHealth = $maxHealth;
     }
 
-    public function getStrength()
+    public function getMaxHealth()
     {
-        return $this->strength;
+        return $this->maxHealth;
     }
 
     public function getJediFactor()
@@ -111,6 +112,16 @@ abstract class AbstractShip
     public function setJediFactor($jediPower)
     {
         $this->jediFactor = $jediPower;
+    }
+    // currentHealth tracking
+    public function setCurrentHealth($currentHealth)
+    {
+        $this->currentHealth = $currentHealth;
+    }
+
+    public function getCurrentHealth()
+    {
+        return $this->currentHealth;
     }
 
     private function getSecretDoorCodeToTheDeathstar()
