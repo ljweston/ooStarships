@@ -22,7 +22,7 @@ class Ship extends AbstractShip
     public function isFunctional()
     {
         // check that the currentHealth is >= 15% of the maxHealth
-        if (parent::getCurrentHealth() <= ((15/100) * parent::getMaxHealth())) {
+        if (parent::getCurrentHealth() <= ((20/100) * parent::getMaxHealth())) {
             return false;
         } else {
             return true;

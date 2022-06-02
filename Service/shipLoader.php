@@ -61,6 +61,7 @@ class ShipLoader
     {
         $this->shipStorage->repairShip($ship);
     }
+    
     public function deleteShip(AbstractShip $ship)
     {
         $this->shipStorage->deleteShip($ship);

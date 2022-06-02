@@ -99,6 +99,8 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                         The <?php echo $battleResult->getWinningShip()->getName(); ?>
                         <?php if ($battleResult->wereJediPowersUsed()): ?>
                             used its Jedi Powers for a stunning victory!
+                        <?php elseif (!$battleResult->getLosingShip()->isFunctional()): ?>
+                            <?php echo $battleResult->getLosingShip()->getName();?> needs repairs and lost!
                         <?php else: ?>
                             overpowered and destroyed the <?php echo $battleResult->getLosingShip()->getName(); ?>
                         <?php endif; ?>
@@ -108,9 +110,9 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                 <h3>Ship Health</h3>
                 <dl class="dl-horizontal">
                     <dt><?php echo $ship1->getName(); ?></dt>
-                    <dd><?php echo $ship1->getMaxHealth(); ?></dd>
+                    <dd><?php echo $ship1->getCurrentHealth(); ?></dd>
                     <dt><?php echo $ship2->getName(); ?></dt>
-                    <dd><?php echo $ship2->getMaxHealth(); ?></dd>
+                    <dd><?php echo $ship2->getCurrentHealth(); ?></dd>
                 </dl>
             </div>
             <a href="/index.php"><p class="text-center"><i class="fa fa-undo"></i> Battle again</p></a>
