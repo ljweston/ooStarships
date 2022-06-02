@@ -30,6 +30,11 @@ abstract class AbstractShip
         return [self::EMPIRE, self::REBEL];
     }
 
+    public function repairShip()
+    {
+        $this->currentHealth = $this->maxHealth;
+    }
+
     public function sayHello()
     {
         echo 'HELLO';

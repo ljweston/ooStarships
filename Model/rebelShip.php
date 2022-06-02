@@ -20,7 +20,14 @@ class RebelShip extends AbstractShip
 
     public function isFunctional()
     {
-        return true;
+        /**
+         * check current health of the ship parent::getCurrentHealth()
+         */
+        if (parent::getCurrentHealth() <= ((10/100) * parent::getMaxHealth())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public function getNameAndSpecs($useShortFormat = false)
