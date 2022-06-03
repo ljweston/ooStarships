@@ -11,8 +11,6 @@ $container = new Container($configuration);
 
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
-
-// require '../layout/header.php';
 ?>
 
         <div class="container">
