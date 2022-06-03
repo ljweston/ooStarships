@@ -44,6 +44,7 @@ require 'layout/header.php';
             <table class="table table-hover">
                 <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
                 <a href="/manage/ships/index.php" class="btn btn-md btn-primary pull-right">Manage Ships</a>
+                <a href="#" class="btn btn-md btn-success pull-right">Manage Heroes</a>
                 <thead>
                     <tr>
                         <th>Ship</th>
@@ -88,6 +89,9 @@ require 'layout/header.php';
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
+                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
+                            <option value="">Choose a Hero</option>
+                        </select>
                         <br>
                         <p class="text-center">AGAINST</p>
                         <br>
@@ -99,6 +103,9 @@ require 'layout/header.php';
                                 <option value="<?php echo $ship->getId(); ?>"><?php echo $ship->getNameAndSpecs(true); ?></option>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                        </select>
+                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
+                            <option value="">Choose a Hero</option>
                         </select>
                         <br>
                         <div class="text-center">
