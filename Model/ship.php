@@ -22,10 +22,6 @@ class Ship extends AbstractShip
     public function isFunctional()
     {
         // check that the currentHealth is >= 15% of the maxHealth
-        if ($this->getCurrentHealth() <= ((20/100) * $this->getMaxHealth())) {
-            return false;
-        } else {
-            return true;
-        }
+        return $this->getCurrentHealth() > ((20/100) * $this->getMaxHealth());
     }
 }
