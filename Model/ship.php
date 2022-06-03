@@ -21,6 +21,7 @@ class Ship extends AbstractShip
     // return if the ship is optional, we return the opposite for it's status for readability.
     public function isFunctional()
     {
-        return !$this->underRepair;
+        // check that the currentHealth is >= 15% of the maxHealth
+        return $this->getCurrentHealth() > ((20/100) * $this->getMaxHealth());
     }
 }

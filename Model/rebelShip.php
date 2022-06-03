@@ -20,7 +20,7 @@ class RebelShip extends AbstractShip
 
     public function isFunctional()
     {
-        return true;
+        return $this->getCurrentHealth() > ((10/100) * $this->getMaxHealth());
     }
 
     public function getNameAndSpecs($useShortFormat = false)

@@ -46,12 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // change to be full health/ MAXHealth
     // check for empty and numeric values
-    $newShip->setStrength($_POST['strength']);
-    if (empty($newShip->getStrength())) {
-        $newShip->setStrength(0);
-    } elseif (!is_numeric($newShip->getStrength())) {
-        $errors[] = 'Strength must be a number';
+    $newShip->setMaxHealth($_POST['health']);
+    if (empty($newShip->getMaxHealth())) {
+        $newShip->setMaxHealth(0);
+    } elseif (!is_numeric($newShip->getMaxHealth())) {
+        $errors[] = 'Max Health must be a number';
     }
+    $newShip->setCurrentHealth($newShip->getMaxHealth());
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
@@ -100,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="jedi-factor" id="ship-jedi-factor">
                 </div>
                 <div class="form-group">
-                    <label for="ship-strength">Strength</label>
-                    <input type="text" name="strength" id="ship-strength">
+                    <label for="ship-health">Max Health</label>
+                    <input type="text" name="health" id="ship-health">
                 </div>
                 <div class="form-group">
                     <label for="ship-team">Ship Allegiance</label>

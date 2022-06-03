@@ -31,7 +31,7 @@ $ships = $shipLoader->getShips();
                         <th>Ship</th>
                         <th>Weapon Power</th>
                         <th>Jedi Factor</th>
-                        <th>Strength</th>
+                        <th>Health</th>
                         <th>Type</th>
                         <th></th>
                     </tr>
@@ -46,7 +46,7 @@ $ships = $shipLoader->getShips();
                             </td>
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
-                            <td><?php echo $ship->getStrength(); ?></td>
+                            <td><?php echo $ship->getCurrentHealth().'/'.$ship->getMaxHealth(); ?></td>
                             <td><?php echo $ship->getType(); ?></td>
                             <td>
                                 <?php if ($ship->isFunctional()) : ?>

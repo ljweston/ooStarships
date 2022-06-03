@@ -11,8 +11,9 @@ interface ShipStorageInterface
      *  * id
      *  * name
      *  * weapon_power
-     *  * strength
+     *  * max_health
      *  * team
+     *  * current_health
      *
      * @return array
      */
@@ -32,6 +33,8 @@ interface ShipStorageInterface
     public function saveShip(AbstractShip $newShip);
 
     public function updateShip(AbstractShip $ship);
+
+    public function repairShip(AbstractShip $ship);
 
     public function deleteShip(AbstractShip $ship);
 }
