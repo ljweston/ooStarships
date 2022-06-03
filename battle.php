@@ -30,21 +30,23 @@ if (isset($_POST['ship2_quantity'])) {
     }
 }
 
-if (!$ship1Id || !$ship2Id) {
-    header('Location: /index.php?error=missing_data');
-    die;
-}
-
-if (!$hero1Id || !$hero2Id) {
+if (!$ship1Id || !$ship2Id || !$hero1Id || !$hero2Id) {
     header('Location: /index.php?error=missing_data');
     die;
 }
 
 $ship1 = $shipLoader->findOneById($ship1Id);
 $ship2 = $shipLoader->findOneById($ship2Id);
+$hero1 = $heroLoader->findOneById($hero1Id);
+$hero2 = $heroLoader->findOneById($hero2Id);
 
 if (!$ship1 || !$ship2) {
     header('Location: /index.php?error=bad_ships');
+    die;
+}
+
+if (!$hero1 || !$hero2) {
+    header('Location: /index.php?error=bad_heroes');
     die;
 }
 
@@ -52,6 +54,8 @@ $battleManager = $container->getBattleManager();
 $battleType = $_POST['battle_type'];
 // We can update battle to accept our two heroes
 $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
+
+var_dump($battleResult->getLosingShip());
 ?>
 
 <html>
@@ -84,8 +88,12 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                 <p class="text-center">
                     <br>
                     <?php echo $ship1Quantity; ?> <?php echo $ship1->getName(); ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
+                    <?php echo 'Lead by '. '<b>'.$hero1->getName().'</b>';?>
+                    <br>
                     VS.
+                    <br>
                     <?php echo $ship2Quantity; ?> <?php echo $ship2->getName(); ?><?php echo $ship2Quantity > 1 ? 's': ''; ?>
+                    <?php echo 'Lead by '. '<b>'.$hero2->getName().'</b>';?>
                 </p>
             </div>
             <div class="result-box center-block">
@@ -106,7 +114,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                         <?php if ($battleResult->wereJediPowersUsed()): ?>
                             used its Jedi Powers for a stunning victory!
                         <?php elseif (!$battleResult->getLosingShip()->isFunctional()): ?>
-                            <?php echo $battleResult->getLosingShip()->getName();?> needs repairs and lost!
+                            wins! The <?php echo $battleResult->getLosingShip()->getName();?> needs repairs and lost!
                         <?php else: ?>
                             overpowered and destroyed the <?php echo $battleResult->getLosingShip()->getName(); ?>
                         <?php endif; ?>
