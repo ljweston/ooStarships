@@ -6,10 +6,15 @@ use Service\Container;
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips(); // values may be getting changed here
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
 
 // Fixed error where ship quantity would not default to 1: then changed it to be cleaner.
 $ship1Id = isset($_POST['ship1_id']) ? $_POST['ship1_id'] : null;
 $ship2Id = isset($_POST['ship2_id']) ? $_POST['ship2_id'] : null;
+
+$hero1Id = isset($_POST['hero1_id']) ? $_POST['hero1_id'] : null;
+$hero2Id = isset($_POST['hero2_id']) ? $_POST['hero2_id'] : null;
 
 $ship1Quantity = 1;
 if (isset($_POST['ship1_quantity'])) {
@@ -30,6 +35,11 @@ if (!$ship1Id || !$ship2Id) {
     die;
 }
 
+if (!$hero1Id || !$hero2Id) {
+    header('Location: /index.php?error=missing_data');
+    die;
+}
+
 $ship1 = $shipLoader->findOneById($ship1Id);
 $ship2 = $shipLoader->findOneById($ship2Id);
 
@@ -38,13 +48,9 @@ if (!$ship1 || !$ship2) {
     die;
 }
 
-// if ($ship1Quantity === null || $ship2Quantity <= 0) {
-//     header('Location: /index.php?error=bad_quantities');
-//     die;
-// }
-
 $battleManager = $container->getBattleManager();
 $battleType = $_POST['battle_type'];
+// We can update battle to accept our two heroes
 $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
 ?>
 

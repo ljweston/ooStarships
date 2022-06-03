@@ -20,7 +20,7 @@ if (isset($_GET['error'])) {
             $errorMessage = 'Don\'t forget to select some ships to battle!';
             break;
         case 'bad_ships':
-            $errorMessage = 'You\'re trying to fight with a ship that\'s unknown to the galaxy?';
+            $errorMessage = 'You\'re trying to fight with a ship or hero that\'s unknown to the galaxy!';
             break;
         case 'bad_quantities':
             $errorMessage = 'You picked a strange numbers of ships to battle - try again.';
