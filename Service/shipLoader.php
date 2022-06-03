@@ -57,9 +57,9 @@ class ShipLoader
         $this->shipStorage->updateShip($ship);
     }
 
-    public function repairShip($id)
+    public function repairShip(AbstractShip $ship)
     {
-        $this->shipStorage->repairShip($id);
+        $this->shipStorage->repairShip($ship);
     }
 
     public function deleteShip(AbstractShip $ship)

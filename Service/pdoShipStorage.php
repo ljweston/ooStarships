@@ -73,12 +73,12 @@ class PdoShipStorage implements ShipStorageInterface
         // maybe return errors if any ecountered
     }
 
-    public function repairShip($id)
+    public function repairShip(AbstractShip $ship)
     {
         $pdo = $this->pdo;
         $query = 'UPDATE OOPShips.ship SET current_health = max_health WHERE id = :idVal';
         $statement = $pdo->prepare($query);
-        $statement->bindValue('idVal', $id);
+        $statement->bindValue('idVal', $ship->getId());
 
         $statement->execute();
     }

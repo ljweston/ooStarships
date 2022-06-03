@@ -8,7 +8,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : null;
 
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
-
-$shipLoader->repairShip($id);
+$ship = $shipLoader->findOneById($id);
+if ($ship === null) {
+    header('Location: /manage/ships/view.php');
+}
+$shipLoader->repairShip($ship);
 
 header('Location: /manage/ships/view.php?id='.$id);
