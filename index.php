@@ -9,6 +9,8 @@ $container = new Container($configuration);
 
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
 
 // Error checking for bad data passed to start a battle
 $errorMessage = '';
@@ -91,6 +93,9 @@ require 'layout/header.php';
                         </select>
                         <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
                             <option value="">Choose a Hero</option>
+                            <?php foreach ($heroes as $hero): ?>
+                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php endforeach; ?>
                         </select>
                         <br>
                         <p class="text-center">AGAINST</p>
@@ -104,8 +109,11 @@ require 'layout/header.php';
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
-                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
+                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero2_id">
                             <option value="">Choose a Hero</option>
+                            <?php foreach ($heroes as $hero): ?>
+                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php endforeach; ?>
                         </select>
                         <br>
                         <div class="text-center">
