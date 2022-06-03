@@ -20,6 +20,10 @@ class Container
 
     private $shipStorage;
 
+    private $heroLoader;
+
+    private $heroStorage;
+
     private $battleManager;
 
     public function __construct(array $configuration)
@@ -66,6 +70,27 @@ class Container
         }
         
         return $this->shipStorage;
+    }
+
+    /**
+     * @return HeroLoader
+     */
+    public function getHeroLoader()
+    {
+        if ($this->heroLoader === null) {
+            $this->heroLoader = new HeroLoader($this->getHeroStorage());
+        }
+
+        return $this->heroLoader;
+    }
+    // Creates PdoHeroStorage obj and gives it our PDO data
+    public function getHeroStorage()
+    {
+        if ($this->heroStorage === null) {
+            $this->heroStorage = new PdoHeroStorage($this->getPDO());
+        }
+        
+        return $this->heroStorage;
     }
 
     /**
