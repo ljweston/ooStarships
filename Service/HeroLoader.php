@@ -60,7 +60,7 @@ class HeroLoader{
         $hero = new Hero($heroData['name']); 
         $hero->setId($heroData['id']);
         $hero->setJediFactor($heroData['jedi_factor']);
-        $hero->getTeam($heroData['team']);
+        $hero->setTeam($heroData['team']);
         // set a currentHealth
         return $hero;
     }
