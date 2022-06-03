@@ -30,6 +30,20 @@ class HeroLoader{
         return new HeroCollection($heroes);
     }
 
+    /**
+     * @param $id
+     * @return Hero|null
+     */
+    public function findOneById($id)
+    {
+        $heroArray = $this->heroStorage->fetchSingleHeroData($id);
+        if ($heroArray === null) {
+            return null;
+        }
+        
+        return $this->createHeroFromData($heroArray);
+    }
+
     private function queryForHeroes()
     {
         try {
