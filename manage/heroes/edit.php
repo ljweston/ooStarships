@@ -11,7 +11,37 @@ $heroLoader = $container->getHeroLoader();
 $errors = [];
 
 // POST REQ handling w/ error handling
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['heroId'])) {
+        $id = $_POST['heroId'];
+        $hero = $heroLoader->findOneById($id); // get a hero obj
+        if ($hero == null) {
+            echo 'HERO NOT FOUND';
+            die;
+        }
+    } else {
+        throw new \Exception('NO HERO WITH THIS ID FOUND');
+    }
 
+    $hero->setName($_POST['name']);
+    if (empty($hero->getName())) {
+        $errors[] = 'This hero needs a name';
+    }
+
+    $hero->setJediFactor($_POST['jedi-factor']);
+    if (empty($hero->getJediFactor())) {
+        $hero->setJediFactor(0);
+    } elseif (!is_numeric($hero->getJediFactor())) {
+        $errors[] = 'Jedi Factor must be a number';
+    }
+
+    if (count($errors) == 0) {
+        $heroLoader->updateHero($hero);
+        // not used in E3
+        header('Location: /manage/heroes/index.php');
+        die;
+    }
+}
 // GET REQ handling
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id'];
