@@ -45,6 +45,11 @@ class PdoHeroStorage
         return $heroArray;
     }
 
+    public function saveHero(Hero $hero)
+    {
+        
+    }
+
     public function updateHero(Hero $hero)
     {
         $pdo = $this->pdo;
