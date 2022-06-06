@@ -9,7 +9,40 @@ use Model\AbstractShip; // get the teams
 $teams = AbstractShip::getTeams();
 $errors = [];
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $team = $_POST['team'];
+    if (empty($team)) {
+        $errors = 'All ships must have an allegiance';
+    } elseif (!in_array($team, $teams)) {
+        $errors[] = 'Select a valid team';
+    }
 
+    $name = $_POST['name'];
+    if (empty($name)) {
+        $errors[] = 'This hero needs a name';
+    }
+
+    $newHero = new Hero($name);
+
+    $newHero->setTeam($team);
+    
+    $newHero->setJediFactor($_POST['weapon-power']);
+    if (empty($newHero->getJediFactor())) {
+        $newHero->setJediFactor(0);
+    } elseif (!is_numeric($newHero->getJediFactor())) {
+        $errors[] = 'Jedi factor must be a number';
+    }
+
+    if (count($errors) == 0) {
+        $continer = new Container($configuration);
+        $heroLoader = $container->getHeroLoader();
+        $heroLoader->saveHero($newHero);
+
+        header('Location: /manage/heroes/index.php');
+        die;
+    }
+
+}
 
 ?>
 
