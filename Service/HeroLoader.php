@@ -44,12 +44,19 @@ class HeroLoader{
         return $this->createHeroFromData($heroArray);
     }
 
-    public function saveHero(Hero $hero) {
+    public function saveHero(Hero $hero)
+    {
         $this->heroStorage->saveHero($hero);
     }
 
-    public function updateHero(Hero $hero) {
+    public function updateHero(Hero $hero)
+    {
         $this->heroStorage->updateHero(($hero));
+    }
+
+    public function deleteHero(Hero $hero)
+    {
+        $this->heroStorage->deleteHero($hero);
     }
 
     private function queryForHeroes()

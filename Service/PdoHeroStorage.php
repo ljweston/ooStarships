@@ -49,7 +49,7 @@ class PdoHeroStorage
     {
         $pdo = $this->pdo;
         $query = 
-            'INSERT INTO ship(name, jedi_factor, team)
+            'INSERT INTO heroes(name, jedi_factor, team)
             VALUES(:nameVal, :jediVal, :teamVal)';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $hero->getName());
@@ -69,10 +69,15 @@ class PdoHeroStorage
         $statement->bindValue('nameVal', $hero->getName());
         $statement->bindValue('jediVal', $hero->getJediFactor());
         $statement->bindValue('idVal', $hero->getId());
-        // isFunctional data
 
         $statement->execute();
 
         // maybe return errors if any ecountered
+    }
+
+    // delete by accepting the hero object and taking the id to find an item and delete
+    public function deleteHero(Hero $hero)
+    {
+
     }
 }
