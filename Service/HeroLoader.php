@@ -15,7 +15,7 @@ class HeroLoader{
     }
 
     /**
-     * @return ShipCollection
+     * @return Hero[]
      */
     public function getHeroes()
     {
@@ -27,7 +27,7 @@ class HeroLoader{
             $heroes[] = $this->createHeroFromData($heroData);
         }
 
-        return new HeroCollection($heroes);
+        return $heroes;
     }
 
     /**

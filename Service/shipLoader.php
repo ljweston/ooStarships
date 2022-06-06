@@ -31,7 +31,7 @@ class ShipLoader
             $ships[] = $this->createShipFromData($shipData);
         }
 
-        return new ShipCollection($ships);
+        return $ships;
     }
     /**
      * @param $id
