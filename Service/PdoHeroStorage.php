@@ -44,4 +44,21 @@ class PdoHeroStorage
 
         return $heroArray;
     }
+
+    public function updateHero(Hero $hero)
+    {
+        $pdo = $this->pdo;
+        $query = 
+            'UPDATE OOPShips.heroes
+            SET name = :nameVal, jedi_factor = :jediVal WHERE id = :idVal';
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('nameVal', $hero->getName());
+        $statement->bindValue('jediVal', $hero->getJediFactor());
+        $statement->bindValue('idVal', $hero->getId());
+        // isFunctional data
+
+        $statement->execute();
+
+        // maybe return errors if any ecountered
+    }
 }
