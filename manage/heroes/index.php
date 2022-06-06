@@ -43,7 +43,7 @@ $heroes = $heroLoader->getHeroes();
             </tbody>
         </table>
         <div>
-            <a href="#" class="btn btn-success">Add New Hero</a>
+            <a href="/manage/heroes/new.php" class="btn btn-success">Add New Hero</a>
         </div>
     </div>
 
