@@ -87,12 +87,12 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                 <p class="text-center">
                     <br>
                     <?php echo $ship1Quantity; ?> <?php echo $ship1->getName(); ?><?php echo $ship1Quantity > 1 ? 's': ''; ?>
-                    <?php echo 'Lead by '. '<b>'.$hero1->getName().'</b>';?>
+                    <?php echo ($hero1 !== null) ? 'Lead by '. '<b>'.$hero1->getName().'</b>' : '';?>
                     <br>
                     VS.
                     <br>
                     <?php echo $ship2Quantity; ?> <?php echo $ship2->getName(); ?><?php echo $ship2Quantity > 1 ? 's': ''; ?>
-                    <?php echo 'Lead by '. '<b>'.$hero2->getName().'</b>';?>
+                    <?php echo ($hero2 !== null) ? 'Lead by '. '<b>'.$hero2->getName().'</b>' : '';?>
                 </p>
             </div>
             <div class="result-box center-block">

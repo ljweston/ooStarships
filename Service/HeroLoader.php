@@ -3,7 +3,6 @@
 namespace Service;
 
 use Model\Hero;
-use Model\HeroCollection;
 
 class HeroLoader{
     
