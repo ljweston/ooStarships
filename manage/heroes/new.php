@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $newHero->setTeam($team);
     
-    $newHero->setJediFactor($_POST['weapon-power']);
+    $newHero->setJediFactor($_POST['jedi-factor']);
     if (empty($newHero->getJediFactor())) {
         $newHero->setJediFactor(0);
     } elseif (!is_numeric($newHero->getJediFactor())) {
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (count($errors) == 0) {
-        $continer = new Container($configuration);
+        $container = new Container($configuration);
         $heroLoader = $container->getHeroLoader();
         $heroLoader->saveHero($newHero);
 
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="">-- Select One --</option>
                         <?php foreach ($teams as $team) : ?>
                             <option value="<?php echo $team?>">
-                                <?php echo ucfirst($team)." Ship"?>
+                                <?php echo ucfirst($team)." Hero"?>
                             </option>
                         <?php endforeach; ?>
                     </select>
