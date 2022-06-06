@@ -78,6 +78,13 @@ class PdoHeroStorage
     // delete by accepting the hero object and taking the id to find an item and delete
     public function deleteHero(Hero $hero)
     {
+        $pdo = $this->pdo;
+        $query = 
+            'DELETE FROM heroes WHERE id = :idVal';
+        
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('idVal', $hero->getId());
 
+        $statement->execute();
     }
 }
