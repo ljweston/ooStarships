@@ -22,7 +22,7 @@ $hero = $heroLoader->findOneById($id);
             <h1> hero Not Found </h1>
         <?php else: ?>
             <div class="page-header">
-                <h1>Viewing the <?php echo $hero->getName()?></h1>
+                <h1>Viewing <?php echo $hero->getName()?></h1>
             </div>
             
             <table class="table table-striped">
@@ -43,8 +43,7 @@ $hero = $heroLoader->findOneById($id);
             </table>
             <div>
                 <a href="/manage/heroes/edit.php?id=<?php echo $id?>" class="btn btn-md btn-success">Edit</a>
-                <a href="/manage/heroes/repair.php?id=<?php echo $id?>" class="btn btn-md btn-primary">Repair</a>
-                <form action="/manage/heroes/delete.php" method="POST">
+                <form action="#" method="POST">
                     <button class="btn btn-md btn-danger" name="deletehero" value="<?php echo $id?>">Delete</button>
                 </form>
                 
