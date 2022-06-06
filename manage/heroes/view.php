@@ -43,8 +43,8 @@ $hero = $heroLoader->findOneById($id);
             </table>
             <div>
                 <a href="/manage/heroes/edit.php?id=<?php echo $id?>" class="btn btn-md btn-success">Edit</a>
-                <form action="#" method="POST">
-                    <button class="btn btn-md btn-danger" name="deletehero" value="<?php echo $id?>">Delete</button>
+                <form action="/manage/heroes/delete.php?id=<?php echo $id?>" method="POST">
+                    <button class="btn btn-md btn-danger" name="deleteHero" value="<?php echo $id?>">Delete</button>
                 </form>
                 
             </div>
