@@ -112,7 +112,7 @@ $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Qua
                         The <?php echo $battleResult->getWinningShip()->getName(); ?>
                         <?php if ($battleResult->wereJediPowersUsed()): ?>
                             used its Jedi Powers for a stunning victory!
-                        <?php elseif (!$battleResult->getLosingShip()->isFunctional()): ?>
+                        <?php elseif ($battleResult->getLosingShip()->getCurrentHealth() > 0): ?>
                             wins! The <?php echo $battleResult->getLosingShip()->getName();?> needs repairs and lost!
                         <?php else: ?>
                             overpowered and destroyed the <?php echo $battleResult->getLosingShip()->getName(); ?>
