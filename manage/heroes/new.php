@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
             <form action="/manage/heroes/new.php" method="POST">
                 <div class="form-group">
-                    <label for="hero-name">hero Name</label>
+                    <label for="hero-name">Hero Name</label>
                     <input type="text" name="name" id="hero-name">
                 </div>
                 <div class="form-group">

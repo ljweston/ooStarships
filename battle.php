@@ -55,7 +55,6 @@ $battleType = $_POST['battle_type'];
 // We can update battle to accept our two heroes
 $battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
 
-var_dump($battleResult->getLosingShip());
 ?>
 
 <html>
