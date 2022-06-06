@@ -47,7 +47,16 @@ class PdoHeroStorage
 
     public function saveHero(Hero $hero)
     {
-        
+        $pdo = $this->pdo;
+        $query = 
+            'INSERT INTO ship(name, jedi_factor, team)
+            VALUES(:nameVal, :jediVal, :teamVal)';
+        $statement = $pdo->prepare($query);
+        $statement->bindValue('nameVal', $hero->getName());
+        $statement->bindValue('jediVal', $hero->getJediFactor());
+        $statement->bindValue('teamVal', $hero->getTeam());
+
+        $statement->execute();
     }
 
     public function updateHero(Hero $hero)
