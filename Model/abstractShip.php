@@ -14,6 +14,7 @@ abstract class AbstractShip
     private $maxHealth = 0;
     private $jediFactor = 0;
     private $currentHealth;
+    private $hero;
     
     abstract public function getType();
 
@@ -23,6 +24,11 @@ abstract class AbstractShip
     public function __construct($name)
     {
         $this->name = $name;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     public static function getTeams()
@@ -119,13 +125,18 @@ abstract class AbstractShip
         return $this->currentHealth;
     }
 
+    public function setHero(Hero $hero = null)
+    {
+        $this->hero = $hero;
+    }
+    
+    public function getHero(): ?Hero
+    {
+        return $this->hero;
+    }
+
     private function getSecretDoorCodeToTheDeathstar()
     {
         return 'Password';
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
     }
 }
