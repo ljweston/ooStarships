@@ -32,7 +32,7 @@ class PdoHeroStorage
     public function fetchSingleHeroData($id)
     {
         $pdo = $this->pdo;
-        $statement = $pdo->prepare('SELECT * FROM heroes WHERE hero_id = :id');
+        $statement = $pdo->prepare('SELECT * FROM heroes WHERE id = :id');
         // preapared statement
         $statement->execute(array('id' => $id));
         // $statement->bindParam()

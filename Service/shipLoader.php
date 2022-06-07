@@ -6,16 +6,19 @@ use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
 use Model\ShipCollection;
+use Service\HeroLoader;
 
 class ShipLoader
 {
     // service class property: used to store options and objs for the class
     private $shipStorage;
+    private $heroLoader;
 
     // configure DB Data or JSON File Data
-    public function __construct(ShipStorageInterface $shipStorage)
+    public function __construct(ShipStorageInterface $shipStorage, HeroLoader $heroLoader)
     {
         $this->shipStorage = $shipStorage;
+        $this->heroLoader = $heroLoader;
     }
 
     /**
@@ -74,14 +77,14 @@ class ShipLoader
             $ship = new RebelShip($shipData['name']); 
         } else {
             $ship = new Ship($shipData['name']);
-            
         }
+        $hero = $this->heroLoader->findOneById($shipData['hero_id']);
         $ship->setId($shipData['id']);
         $ship->setWeaponPower($shipData['weapon_power']);
         $ship->setJediFactor($shipData['jedi_factor']);
         $ship->setMaxHealth($shipData['max_health']);
         $ship->setCurrentHealth($shipData['current_health']);
-        // set a currentHealth
+        $ship->setHero($hero);
         return $ship;
     }
 

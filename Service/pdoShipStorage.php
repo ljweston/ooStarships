@@ -57,8 +57,8 @@ class PdoShipStorage implements ShipStorageInterface
         // connect to DB
         $pdo = $this->pdo;
         $query = 
-            'INSERT INTO ship(name, weapon_power, jedi_factor, max_health, team, current_health)
-            VALUES(:nameVal, :weaponVal, :jediVal, :maxHealthVal, :teamVal, :currentHealthVal)';
+            'INSERT INTO ship(name, weapon_power, jedi_factor, max_health, team, current_health, hero_id)
+            VALUES(:nameVal, :weaponVal, :jediVal, :maxHealthVal, :teamVal, :currentHealthVal, :heroVal)';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
         $statement->bindValue('weaponVal', $ship->getWeaponPower());
@@ -66,7 +66,8 @@ class PdoShipStorage implements ShipStorageInterface
         $statement->bindValue('maxHealthVal', $ship->getMaxHealth());
         $statement->bindValue('teamVal', $ship->getType());
         $statement->bindValue('currentHealthVal', $ship->getCurrentHealth());
-        // isFunctional data
+        $statement->bindValue('heroVal', $ship->getHero() !== null ? $ship->getHero()->getId() : null);
+        
 
         $statement->execute();
 
