@@ -19,7 +19,7 @@ class PdoHeroStorage
     public function fetchAllHeroesData()
     {
         $pdo = $this->pdo;
-        $statement = $pdo->prepare('SELECT * FROM heroes');
+        $statement = $pdo->prepare('SELECT * FROM heroes ORDER BY name ASC');
         $statement->execute();
         $heroesArray = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
