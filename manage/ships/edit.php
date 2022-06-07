@@ -139,11 +139,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <div class="form-group">
                     <label for="heroSelection"></label>
                     <select class="form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
-                        <option value="<?php echo $ship->getHero()->getId();?>"><?php echo $ship->getHero();?></option>
+                        <option value="<?php echo $ship->getHero() !== null ? $ship->getHero()->getId() : '';?>">
+                            <?php echo $ship->getHero() !== null ? $ship->getHero() : 'Assign a hero';?>
+                        </option>
                         <?php foreach ($heroes as $hero): ?>
-                            <?php if ($hero->getTeam() == $ship->getType()) { ?>
-                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
-                            <?php }?>
+                            <?php if ($ship->getType() === $hero->getTeam()) {?>
+                                <!-- if so we check that the ship can only assign heroes of the same type -->
+                                    <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php } ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
