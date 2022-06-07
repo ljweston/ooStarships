@@ -4,7 +4,7 @@ require '../layout/header.php';
 
 use Service\Container;
 
-$error = false;
+$isDeleted = false;
 
 if (isset($_POST['deleteHero'])) {
     $id = $_POST['deleteHero'];
@@ -14,9 +14,7 @@ if (isset($_POST['deleteHero'])) {
     $hero = $heroLoader->findOneById($id);
     if ($hero !== null) {
         $heroLoader->deleteHero($hero);
-    } else {
-        echo '<h1> There is no hero with this ID to delete </h1>';
-        $error = true;
+        $isDeleted = true;
     }
 } else {
     echo '<h2> There is no ship to delete</h2>';
@@ -24,8 +22,8 @@ if (isset($_POST['deleteHero'])) {
 
 ?>
 <?php
-    echo (!$error) ? ('<h2>This hero has met a terrible end!</h2>')
-    : ('');
+    echo ($isDeleted) ? ('<h2>This hero has met a terrible end!</h2>')
+    : ('<h2>Hero not found</h2>');
 ?>
 
 <a href="/index.php">Return to the battle!</a>
