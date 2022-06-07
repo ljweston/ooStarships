@@ -32,7 +32,7 @@ class PdoHeroStorage
     public function fetchSingleHeroData($id)
     {
         $pdo = $this->pdo;
-        $statement = $pdo->prepare('SELECT * FROM heroes WHERE id = :id');
+        $statement = $pdo->prepare('SELECT * FROM heroes WHERE hero_id = :id');
         // preapared statement
         $statement->execute(array('id' => $id));
         // $statement->bindParam()
@@ -64,7 +64,7 @@ class PdoHeroStorage
         $pdo = $this->pdo;
         $query = 
             'UPDATE OOPShips.heroes
-            SET name = :nameVal, jedi_factor = :jediVal WHERE id = :idVal';
+            SET name = :nameVal, jedi_factor = :jediVal WHERE hero_id = :idVal';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $hero->getName());
         $statement->bindValue('jediVal', $hero->getJediFactor());
