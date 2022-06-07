@@ -61,6 +61,10 @@ $ship = $shipLoader->findOneById($id);
                             <?php endif; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <th>Assigned Hero:</th>
+                        <td><?php echo ($ship->getHero() === null) ? 'No hero assigned' : $ship->getHero();?></td>
+                    </tr>
                 </tbody>
             </table>
             <div>

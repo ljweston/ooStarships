@@ -6,7 +6,6 @@ require '../layout/header.php';
 use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
-use Model\Hero;
 use Service\Container;
 
 $teams = AbstractShip::getTeams();
@@ -61,8 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newShip->setCurrentHealth($newShip->getMaxHealth());
 
     // assign a hero
-    var_dump($_POST['hero_id']);
-    die;
+    $hero = $heroLoader->findOneById($_POST['hero_id']);
+    // Add logic for heroes not being assigned to an incorrect team
+    if ($hero !== null) {
+        // save the hero object and pass that into setHero
+        $newShip->setHero($hero);
+        // $errors[] = 'You must assign a valid hero';
+    }
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
