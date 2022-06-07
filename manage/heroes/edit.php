@@ -46,6 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $id = $_GET['id'];
     $hero = $heroLoader->findOneById($id);
+    if ($hero === null) {
+        echo '<h2> Hero not found </h2>';
+        die;
+    }
 }
 
 ?>
@@ -55,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <li><a href="/">Home</a></li>
         <li><a href="/manage/heroes/index.php">Manageheroes</a></li>
         <li><a href="/manage/heroes/view.php?id=<?php echo $id;?>"><?php echo $hero->getName();?></a></li>
-        <li>Editing <?php echo $hero->getName();?></li> 
+        <li><?php echo $hero === null ? "Hero not found" : 'Editing '.$hero->getName()?></li> 
     </ul>
     <div class="row">
         <div class="col-xs-6">
@@ -72,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <?php endif; ?>
             <form action="/manage/heroes/edit.php" method="POST">
                 <div class="form-group">
-                    <label for="hero-name">hero Name</label>
+                    <label for="hero-name">Hero Name</label>
                     <input type="text" name="name" id="hero-name" value="<?php echo $hero->getName()?>">
                 </div>
                 <div class="form-group">
@@ -80,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <input type="text" name="jedi-factor" id="hero-jedi-factor" value="<?php echo $hero->getJediFactor()?>">
                 </div>
                 <div class="form-group">
-                    <label for="hero-team">hero Allegiance</label>
+                    <label for="hero-team">Hero Allegiance</label>
                     <select name="team" id="hero-team" disabled>
                         <!-- loaded original/ saved value first -->
                         <option value="<?php echo $hero->getTeam()?>">

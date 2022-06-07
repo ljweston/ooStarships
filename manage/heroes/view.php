@@ -16,10 +16,10 @@ $hero = $heroLoader->findOneById($id);
         <ul class="breadcrumb">
             <li><a href="/">Home</a></li>
             <li><a href="/manage/heroes/index.php">ManageHeroes</a></li>
-            <li><?php echo $hero === null ? "hero not found" : $hero->getName()?></li>
+            <li><?php echo $hero === null ? "Hero not found" : $hero->getName()?></li>
         </ul>
         <?php if ($hero === null): ?>
-            <h1> hero Not Found </h1>
+            <h1> Hero Not Found </h1>
         <?php else: ?>
             <div class="page-header">
                 <h1>Viewing <?php echo $hero->getName()?></h1>
