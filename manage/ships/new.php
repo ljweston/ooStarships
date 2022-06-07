@@ -6,10 +6,16 @@ require '../layout/header.php';
 use Model\RebelShip;
 use Model\Ship;
 use Model\AbstractShip;
+use Model\Hero;
 use Service\Container;
 
 $teams = AbstractShip::getTeams();
 $errors = [];
+
+// get our heroes
+$container = new Container($configuration);
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // confirm a team has been selected
@@ -53,6 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Max Health must be a number';
     }
     $newShip->setCurrentHealth($newShip->getMaxHealth());
+
+    // assign a hero
+    var_dump($_POST['hero_id']);
+    die;
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
@@ -112,6 +122,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="<?php echo $team?>">
                                 <?php echo ucfirst($team)." Ship"?>
                             </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="heroSelection"></label>
+                    <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
+                        <option value="">Choose a Hero</option>
+                        <?php foreach ($heroes as $hero): ?>
+                            <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
