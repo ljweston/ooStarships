@@ -63,9 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hero = $heroLoader->findOneById($_POST['hero_id']);
     // Add logic for heroes not being assigned to an incorrect team
     if ($hero !== null) {
-        // save the hero object and pass that into setHero
-        $newShip->setHero($hero);
-        // $errors[] = 'You must assign a valid hero';
+        if ($hero->getTeam() == $newShip->getType()) {
+            $newShip->setHero($hero);
+        } else {
+            $errors[] = 'Your hero can only fight for ships of type: '.$newShip->getType();
+        }
     }
 
     if (count($errors) == 0) {
@@ -131,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="heroSelection"></label>
-                    <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
+                    <select class="form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
                         <option value="">Choose a Hero</option>
                         <?php foreach ($heroes as $hero): ?>
                             <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
