@@ -55,7 +55,7 @@ class Container
     public function getShipLoader()
     {
         if ($this->shipLoader === null) {
-            $this->shipLoader = new ShipLoader($this->getShipStorage());
+            $this->shipLoader = new ShipLoader($this->getShipStorage(), $this->getHeroLoader()); // dependency injection
         }
 
         return $this->shipLoader;
