@@ -16,8 +16,6 @@ if (isset($_POST['deleteHero'])) {
         $heroLoader->deleteHero($hero);
         $isDeleted = true;
     }
-} else {
-    echo '<h2> There is no ship to delete</h2>';
 }
 
 ?>

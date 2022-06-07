@@ -2,11 +2,10 @@
 
 require '../layout/header.php';
 
-use Model\hero;
+use Model\Hero;
 use Service\Container;
-use Model\Hero as ModelHero; // get our teams
 
-$teams = ModelHero::getValidTeams();
+$teams = Hero::getValidTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
