@@ -4,6 +4,9 @@ namespace Model;
 
 class Hero
 {
+    const EMPIRE = 'empire';
+    const REBEL = 'rebel';
+
     private $id;
     private $name;
     private $jediFactor;
@@ -14,6 +17,11 @@ class Hero
         $this->name = $name;
     }
 
+    public static function getTeams()
+    {
+        return [self::EMPIRE, self::REBEL];
+    }
+    
     public function getId()
     {
         return $this->id;

@@ -4,9 +4,9 @@ require '../layout/header.php';
 
 use Model\hero;
 use Service\Container;
-use Model\AbstractShip; // get the teams
+use Model\Hero as ModelHero; // get our teams
 
-$teams = AbstractShip::getTeams();
+$teams = ModelHero::getTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
