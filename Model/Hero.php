@@ -17,11 +17,11 @@ class Hero
         $this->name = $name;
     }
 
-    public static function getTeams()
+    public static function getValidTeams()
     {
         return [self::EMPIRE, self::REBEL];
     }
-    
+
     public function getId()
     {
         return $this->id;

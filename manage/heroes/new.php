@@ -6,7 +6,7 @@ use Model\hero;
 use Service\Container;
 use Model\Hero as ModelHero; // get our teams
 
-$teams = ModelHero::getTeams();
+$teams = ModelHero::getValidTeams();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
