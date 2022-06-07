@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Max Health must be a number';
     }
 
+    // add logic for ships assigning a new hero. Check that the hero is the same team as the ship
+
     if (count($errors) == 0) {
         $shipLoader->updateShip($ship);
         // not used in E3
@@ -120,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <option value="">-- Select One --</option>
                     </select>
                 </div>
+                <!-- Drop down for selecting a hero on the same team -->
 
                 <button class="btn btn-success" name="shipId" value="<?php echo $id?>"><span class="glyphicon glyphicon-plus"></span></button>
             </form>

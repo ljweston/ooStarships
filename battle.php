@@ -37,6 +37,7 @@ if (!$ship1Id || !$ship2Id || !$hero1Id || !$hero2Id) {
 
 $ship1 = $shipLoader->findOneById($ship1Id);
 $ship2 = $shipLoader->findOneById($ship2Id);
+// with changes we use the hero object in ship
 $hero1 = $heroLoader->findOneById($hero1Id);
 $hero2 = $heroLoader->findOneById($hero2Id);
 
