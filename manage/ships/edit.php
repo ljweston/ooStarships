@@ -11,6 +11,11 @@ $shipLoader = $container->getShipLoader();
 $teams = AbstractShip::getTeams();
 $errors = [];
 
+// get our heroes
+$container = new Container($configuration);
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // set the shipID and instantiate a ship
     if (isset($_POST['shipId'])) {
@@ -54,6 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // add logic for ships assigning a new hero. Check that the hero is the same team as the ship
+    $hero = $heroLoader->findOneById($_POST['hero_id']);
+
+    if($hero !== null) {
+        if ($hero->getTeam() == $ship->getType()) {
+            $ship->setHero($hero);
+        } else {
+            $errors[] = 'Your hero can only fight for ships of type: '.$ship->getType();
+        }
+    }
 
     if (count($errors) == 0) {
         $shipLoader->updateShip($ship);
@@ -122,7 +136,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <option value="">-- Select One --</option>
                     </select>
                 </div>
-                <!-- Drop down for selecting a hero on the same team -->
+                <div class="form-group">
+                    <label for="heroSelection"></label>
+                    <select class="form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
+                        <option value="<?php echo $ship->getHero()->getId();?>"><?php echo $ship->getHero();?></option>
+                        <?php foreach ($heroes as $hero): ?>
+                            <?php if ($hero->getTeam() == $ship->getType()) { ?>
+                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php }?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
                 <button class="btn btn-success" name="shipId" value="<?php echo $id?>"><span class="glyphicon glyphicon-plus"></span></button>
             </form>

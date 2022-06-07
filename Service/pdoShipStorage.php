@@ -90,7 +90,7 @@ class PdoShipStorage implements ShipStorageInterface
         $query = 
             'UPDATE OOPShips.ship
             SET name = :nameVal, weapon_power = :weaponVal, jedi_factor = :jediVal,
-            max_health = :maxHealthVal, team = :teamVal, current_health = :currentHealthVal
+            max_health = :maxHealthVal, team = :teamVal, current_health = :currentHealthVal, hero_id = :heroVal
             WHERE id = :idVal';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $ship->getName());
@@ -100,7 +100,7 @@ class PdoShipStorage implements ShipStorageInterface
         $statement->bindValue('teamVal', $ship->getType());
         $statement->bindValue('currentHealthVal', $ship->getCurrentHealth());
         $statement->bindValue('idVal', $ship->getId());
-        // isFunctional data
+        $statement->bindValue('heroVal', $ship->getHero() !== null ? $ship->getHero()->getId() : null);
 
         $statement->execute();
 
