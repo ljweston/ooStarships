@@ -9,6 +9,8 @@ $container = new Container($configuration);
 
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips();
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
 
 // Error checking for bad data passed to start a battle
 $errorMessage = '';
@@ -18,10 +20,13 @@ if (isset($_GET['error'])) {
             $errorMessage = 'Don\'t forget to select some ships to battle!';
             break;
         case 'bad_ships':
-            $errorMessage = 'You\'re trying to fight with a ship that\'s unknown to the galaxy?';
+            $errorMessage = 'You\'re trying to fight with a ship or hero that\'s unknown to the galaxy!';
             break;
         case 'bad_quantities':
             $errorMessage = 'You picked a strange numbers of ships to battle - try again.';
+            break;
+        case 'bad_heroes':
+            $errorMessage = 'We cannot sense this hero - try again.';
             break;
         default:
             $errorMessage = 'There was a disturbance in the force. Try again.';
@@ -44,6 +49,7 @@ require 'layout/header.php';
             <table class="table table-hover">
                 <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
                 <a href="/manage/ships/index.php" class="btn btn-md btn-primary pull-right">Manage Ships</a>
+                <a href="/manage/heroes/index.php" class="btn btn-md btn-success pull-right">Manage Heroes</a>
                 <thead>
                     <tr>
                         <th>Ship</th>
@@ -88,6 +94,12 @@ require 'layout/header.php';
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
+                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
+                            <option value="">Choose a Hero</option>
+                            <?php foreach ($heroes as $hero): ?>
+                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <br>
                         <p class="text-center">AGAINST</p>
                         <br>
@@ -98,6 +110,12 @@ require 'layout/header.php';
                                 <?php if ($ship->isFunctional()) : ?>
                                 <option value="<?php echo $ship->getId(); ?>"><?php echo $ship->getNameAndSpecs(true); ?></option>
                                 <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero2_id">
+                            <option value="">Choose a Hero</option>
+                            <?php foreach ($heroes as $hero): ?>
+                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
                             <?php endforeach; ?>
                         </select>
                         <br>
