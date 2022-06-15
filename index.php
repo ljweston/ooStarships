@@ -94,12 +94,6 @@ require 'layout/header.php';
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </select>
-                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero1_id">
-                            <option value="">Choose a Hero</option>
-                            <?php foreach ($heroes as $hero): ?>
-                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
-                            <?php endforeach; ?>
-                        </select>
                         <br>
                         <p class="text-center">AGAINST</p>
                         <br>
@@ -110,12 +104,6 @@ require 'layout/header.php';
                                 <?php if ($ship->isFunctional()) : ?>
                                 <option value="<?php echo $ship->getId(); ?>"><?php echo $ship->getNameAndSpecs(true); ?></option>
                                 <?php endif; ?>
-                            <?php endforeach; ?>
-                        </select>
-                        <select class="center-block form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero2_id">
-                            <option value="">Choose a Hero</option>
-                            <?php foreach ($heroes as $hero): ?>
-                                <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
                             <?php endforeach; ?>
                         </select>
                         <br>

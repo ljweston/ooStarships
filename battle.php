@@ -6,6 +6,7 @@ use Service\Container;
 $container = new Container($configuration);
 $shipLoader = $container->getShipLoader();
 $ships = $shipLoader->getShips(); // values may be getting changed here
+// grab hero data from the ship. Must check if the ship has a hero if not, load no bonus or a default of 0
 $heroLoader = $container->getHeroLoader();
 $heroes = $heroLoader->getHeroes();
 
