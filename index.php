@@ -67,7 +67,7 @@ require 'layout/header.php';
                             <td><?php echo $ship->getWeaponPower(); ?></td>
                             <td><?php echo $ship->getJediFactor(); ?></td>
                             <td><?php echo $ship->getCurrentHealth().'/'.$ship->getMaxHealth(); ?></td>
-                            <td><?php echo $ship->getType(); ?></td>
+                            <td><?php echo ucfirst($ship->getType()); ?></td>
                             <td>
                                 <?php if ($ship->isFunctional()) : ?>
                                     <i class="Fa fa-sun-o"></i>

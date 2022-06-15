@@ -75,13 +75,13 @@ class BattleManager
             if ($ship1Health <= 0) {
                 $ship1->setCurrentHealth(0);
             } else {
-                $ship1->setCurrentHealth($ship1Health/$ship1Quantity);
+                $ship1->setCurrentHealth(floor($ship1Health/$ship1Quantity));
             }
     
             if ($ship2Health<= 0) {
                 $ship2->setCurrentHealth(0);
             } else {
-                $ship2->setCurrentHealth($ship2Health/$ship2Quantity);
+                $ship2->setCurrentHealth(floor($ship2Health/$ship2Quantity));
             }
         }
         /**
