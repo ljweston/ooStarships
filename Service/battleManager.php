@@ -43,15 +43,16 @@ class BattleManager
         $ship2UsedJediPowers = false;
         $i = 0;
         while ($ship1->isFunctional() && $ship2->isFunctional()) {
-            // first, see if we have a rare Jedi hero event!
+            // Can we use jedi powers?
             if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship1)) {
-                $ship2Health = 0;
+                $ship2->setCurrentHealth(0);
                 $ship1UsedJediPowers = true;
 
                 break;
             }
+            // can we use jedi powers?
             if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship2)) {
-                $ship1Health = 0;
+                $ship1->setCurrentHealth(0);
                 $ship2UsedJediPowers = true;
 
                 break;
@@ -62,7 +63,7 @@ class BattleManager
                 $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
                 $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);
             }
-            // avoid infinite loop
+            // Should be able to remove this
             if ($i == 100) {
                 $ship1Health = 0;
                 $ship2Health = 0;
@@ -112,8 +113,14 @@ class BattleManager
     // Once heroes are implemented we will use the heroes modifiers + the ships base mods
     private function didJediDestroyShipUsingTheForce(AbstractShip $ship)
     {
-        $jediHeroProbability = $ship->getJediFactor() / 100;
-
+        // check if passed in ship has a hero assigned
+        if ($ship->getHero() != null) {
+            // if there is a hero apply their bonus
+            $jediHeroProbability = $ship->getJediFactor() + $ship->getHero()->getJediFactor() / 100;
+        } else {
+            $jediHeroProbability = $ship->getJediFactor() / 100;
+        }
+        var_dump($jediHeroProbability);
         return mt_rand(1, 100) <= ($jediHeroProbability*100);
     }
 }
