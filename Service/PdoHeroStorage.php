@@ -64,7 +64,7 @@ class PdoHeroStorage
         $pdo = $this->pdo;
         $query = 
             'UPDATE OOPShips.heroes
-            SET name = :nameVal, jedi_factor = :jediVal WHERE id = :idVal';
+            SET name = :nameVal, jedi_factor = :jediVal WHERE hero_id = :idVal';
         $statement = $pdo->prepare($query);
         $statement->bindValue('nameVal', $hero->getName());
         $statement->bindValue('jediVal', $hero->getJediFactor());

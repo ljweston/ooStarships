@@ -11,6 +11,11 @@ use Service\Container;
 $teams = AbstractShip::getTeams();
 $errors = [];
 
+// get our heroes
+$container = new Container($configuration);
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // confirm a team has been selected
     $team = $_POST['team'];
@@ -53,6 +58,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Max Health must be a number';
     }
     $newShip->setCurrentHealth($newShip->getMaxHealth());
+
+    // assign a hero
+    $hero = $heroLoader->findOneById($_POST['hero_id']);
+    // Add logic for heroes not being assigned to an incorrect team
+    if ($hero !== null) {
+        if ($hero->getTeam() == $newShip->getType()) {
+            $newShip->setHero($hero);
+        } else {
+            $errors[] = 'Your hero can only fight for ships of type: '.$newShip->getType();
+        }
+    }
 
     if (count($errors) == 0) {
         $container = new Container($configuration);
@@ -112,6 +128,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="<?php echo $team?>">
                                 <?php echo ucfirst($team)." Ship"?>
                             </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="heroSelection"></label>
+                    <select class="form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
+                        <option value="">Choose a Hero</option>
+                        <?php foreach ($heroes as $hero): ?>
+                            <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

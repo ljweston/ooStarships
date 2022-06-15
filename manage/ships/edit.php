@@ -11,6 +11,11 @@ $shipLoader = $container->getShipLoader();
 $teams = AbstractShip::getTeams();
 $errors = [];
 
+// get our heroes
+$container = new Container($configuration);
+$heroLoader = $container->getHeroLoader();
+$heroes = $heroLoader->getHeroes();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // set the shipID and instantiate a ship
     if (isset($_POST['shipId'])) {
@@ -51,6 +56,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ship->setMaxHealth(0);
     } elseif (!is_numeric($ship->getMaxHealth())) {
         $errors[] = 'Max Health must be a number';
+    }
+
+    // add logic for ships assigning a new hero. Check that the hero is the same team as the ship
+    $hero = $heroLoader->findOneById($_POST['hero_id']);
+
+    if($hero !== null) {
+        if ($hero->getTeam() == $ship->getType()) {
+            $ship->setHero($hero);
+        } else {
+            $errors[] = 'Your hero can only fight for ships of type: '.$ship->getType();
+        }
     }
 
     if (count($errors) == 0) {
@@ -118,6 +134,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             </option>
                         <?php endforeach; ?>
                         <option value="">-- Select One --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="heroSelection"></label>
+                    <select class="form-control btn drp-dwn-width btn-default dropdown-toggle" name="hero_id" id="heroSelection">
+                        <option value="<?php echo $ship->getHero() !== null ? $ship->getHero()->getId() : '';?>">
+                            <?php echo $ship->getHero() !== null ? $ship->getHero() : 'Assign a hero';?>
+                        </option>
+                        <?php foreach ($heroes as $hero): ?>
+                            <?php if ($ship->getType() === $hero->getTeam()) {?>
+                                <!-- if so we check that the ship can only assign heroes of the same type -->
+                                    <option value="<?php echo $hero->getId(); ?>"><?php echo $hero->getNameAndPower(); ?></option>
+                            <?php } ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 

@@ -17,6 +17,11 @@ class Hero
         $this->name = $name;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public static function getValidTeams()
     {
         return [self::EMPIRE, self::REBEL];
