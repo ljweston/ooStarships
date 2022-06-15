@@ -45,6 +45,7 @@ class BattleManager
         while ($ship1->isFunctional() && $ship2->isFunctional()) {
             // Can we use jedi powers?
             if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship1)) {
+                // Jedi powers destroyed ship2
                 $ship2->setCurrentHealth(0);
                 $ship1UsedJediPowers = true;
 
@@ -52,6 +53,7 @@ class BattleManager
             }
             // can we use jedi powers?
             if ($battleType != self::TYPE_NO_JEDI && $this->didJediDestroyShipUsingTheForce($ship2)) {
+                // Jedi powers destoryed ship1
                 $ship1->setCurrentHealth(0);
                 $ship2UsedJediPowers = true;
 
